@@ -24,8 +24,8 @@ public class FileUpload_test extends BaseTest {
         new NavigationPage()
                 .navigateTo(FILE_UPLOAD);
         new FileUploadPage()
-                .FileUpload("/Users/marys/Downloads/unnamed.png")
+                .FileUpload()
                 .ClickUpload()
-                .verifyFileName("unnamed.png");
+                .verifyFileName("9919.png");
     }
 }
