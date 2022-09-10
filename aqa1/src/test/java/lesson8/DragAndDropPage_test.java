@@ -7,6 +7,7 @@ import pageObjects.herokuapp.DragAndDropPage;
 import pageObjects.herokuapp.NavigationPage;
 
 import java.awt.*;
+import java.io.IOException;
 
 import static pageObjects.herokuapp.NavigationItems.*;
 
@@ -23,22 +24,13 @@ public class DragAndDropPage_test extends BaseTest {
     }
 
     @Test
-    public void test1() throws AWTException {
+    public void test1() throws AWTException, IOException {
         new NavigationPage()
                 .navigateTo(DRAG_AND_DROP);
         new DragAndDropPage()
-        .FromAToB()
+                .FromAToB()
                 .verifyChangeA()
                 .FromBToA()
                 .verifyChangeB();
-    }
-
-
-    private void pause(Integer timeout) {
-        try {
-            Thread.sleep(timeout * 1000); // timeout по умолчанию принимает милисекунлы, поэтому умножаем 1000
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
