@@ -15,9 +15,16 @@ public class LoginPage extends BasePage {
     private final By loginBtn = By.id("login-button");
 
    //методы возвращают ссылку на самого себя - те могут быть сигнатурами LoginPage
+    //такая запись не очень, лучще выносить урлы на уроани параметров, что делает тесты более гибкими
     public LoginPage open() {
         driver.get("https://www.saucedemo.com/");
         return this; //this- каждый из методов возвращает ссылку на данный объект
+    }
+
+    //для примера с параметризированными тестами
+    public LoginPage open(String url) {//урл прописываем в xml файле
+        driver.get(url);
+        return this;
     }
 
     public LoginPage enterUsername(String username) {
