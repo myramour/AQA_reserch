@@ -13,6 +13,7 @@ import static driver.SimpleDriver.getWebDriver;
 public class ProductPage extends BasePage {
        private final By title = By.xpath("//span[@class='title']");
        private final List<WebElement> getFilterOptions = getWebDriver().findElements(By.tagName("option"));
+       private final By addToCartBtn = By.cssSelector("[id|=add-to-cart]");
 
        //метод, который позволяет обратиться к форме товара
        private WebElement getElementProduct(String productName) {
@@ -39,7 +40,7 @@ public class ProductPage extends BasePage {
 
 
        public ProductPage verifyPageTitle() {
-           Assert.assertEquals(getWebDriver().findElement(title).getText(), "PRODUCTS");
+           Assert.assertEquals(getText(title), "PRODUCTS");
            return this;
 
        }
@@ -56,6 +57,12 @@ public class ProductPage extends BasePage {
 
        public ProductPage addProductToBasket(String productName) {
            click(getAddToCartBtn(productName));
+           return this;
+       }
+
+       //для реализации с invocationCount
+       public ProductPage addAllProductToBasket() {
+           clickAll(addToCartBtn);
            return this;
        }
 

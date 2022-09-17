@@ -31,17 +31,18 @@ public class SimpleDriver {
         }
     }
 
-    public static void closeWebDriver(){
-        if (webDriver != null) {
-            webDriver.get().close(); // закрыть текущее окно
-            webDriver.get().quit(); //выйти из драйвера и закрыть все окна (напрямую закрывает браузер)
-            webDriver = null; // обнуляет созданный элемент
-        }
-    }
-
     public static WebDriver getWebDriver() {// получение
         return webDriver.get();
     }
+
+    public static void closeWebDriver(){
+        if (webDriver.get() != null) {
+            webDriver.get().close(); // закрыть текущее окно
+            webDriver.get().quit(); //выйти из драйвера и закрыть все окна (напрямую закрывает браузер)
+            webDriver.remove(); // обнуляет созданный элемент
+        }
+    }
+
 
     private static ChromeOptions getChromeOptions() { //метод, который возвращает опции браузера
         ChromeOptions chromeOptions = new ChromeOptions();

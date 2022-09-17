@@ -57,6 +57,26 @@ public class BasePage {
         webElement.click();
     }
 
+    protected void clickAll(By locator) {
+            List<WebElement> buttons = driver.findElements(locator);
+            for (WebElement button : buttons) {
+                System.out.println("I'm click by :: " + locator);
+                button.click();
+        }
+    }
+
+    //или так
+    protected void clickAll(By... elements) { //в качестве аргумента(ов) для этого метода могут быть переданы ноль или более объектов By (или их массив).
+        for (By element : elements) {
+            System.out.println("Click on element :: " + element);
+            List<WebElement> buttons = driver.findElements(element);
+            for (WebElement button : buttons) {
+                button.click();
+            }
+        }
+    }
+
+
     protected void selectByText(By locator,String value) {
         Select select = new Select(driver.findElement(locator));
         select.selectByVisibleText(value);
