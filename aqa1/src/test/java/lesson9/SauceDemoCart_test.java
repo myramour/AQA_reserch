@@ -9,10 +9,11 @@ import pageObjects.saucedemo.ProductPage;
 
 public class SauceDemoCart_test extends BaseTest {
 
+    @Parameters("url")
     @BeforeClass
-    public void preconditions() {
+    public void preconditions(String url) {
         new LoginPage()
-                .open()
+                .open(url)
                 .enterUsername("standard_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn();
@@ -23,7 +24,7 @@ public class SauceDemoCart_test extends BaseTest {
 
     /** Написать тесты на создание/редактирование и удаление продуктов (invocationCount) */
 
-    @Test(invocationCount = 3, priority = 1, threadPoolSize = 3,description = "Test add product with invocationCount",dependsOnMethods ="preconditions")
+    @Test(invocationCount = 3, priority = 1,description = "Test add product with invocationCount")
     public void addProductsTest1(){
         new ProductPage()
                 .addAllProductToBasket();

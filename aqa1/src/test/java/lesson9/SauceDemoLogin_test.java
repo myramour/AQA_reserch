@@ -1,10 +1,12 @@
 package lesson9;
 
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.LoginPage;
 import pageObjects.saucedemo.ProductPage;
-
 
 /**Написать тесты на Логин страницу - 1 позитивный и 3 негативных (DataProvider)*/
 
