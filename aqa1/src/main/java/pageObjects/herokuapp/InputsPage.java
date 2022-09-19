@@ -21,6 +21,7 @@ public class InputsPage extends BasePage {
 
 
     public InputsPage setUpAndVerify(int startValue,int countIteration){
+        //сюда добавить input.sendKeys("value"); и в переменных метода String value тогда верхнее можно убрать
         String valueFromInput = input.getAttribute("value");
         for (int i = 0; i <= countIteration; i++) {
             input.sendKeys(Keys.UP);

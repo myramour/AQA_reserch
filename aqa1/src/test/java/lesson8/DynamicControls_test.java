@@ -1,10 +1,14 @@
 package lesson8;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.herokuapp.DynamicControlsPage;
 import pageObjects.herokuapp.NavigationPage;
+import testNgUtils.Listener;
+
 import static pageObjects.herokuapp.NavigationItems.*;
 
 /** Dynamic Controls
@@ -19,12 +23,13 @@ import static pageObjects.herokuapp.NavigationItems.*;
  9- Проверить, что инпут enabled */
 
 public class DynamicControls_test extends BaseTest {
+    @Parameters("url")
     @BeforeMethod
-    public void precondition() {
+    public void precondition(String url) {
         new NavigationPage()
-                .open();
+                .open(url);
     }
-    @Test
+    @Test(priority = 3, description = " Dynamic controls test")
     public void test1(){
         new NavigationPage()
                 .navigateTo(DYNAMIC_CONTROLS);
