@@ -3,6 +3,7 @@ package lesson10;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pageObjects.baseObjects.BaseTest;
 import pageObjects.herokuapp.DataTables2;
 import pageObjects.herokuapp.DataTablesPage;
 import pageObjects.herokuapp.NavigationPage;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 import static pageObjects.herokuapp.NavigationItems.DATA_TABLES;
 
-public class Lesson10_2test {
+public class Lesson10_2test extends BaseTest {
     @BeforeMethod
     public void precondition() {
         new NavigationPage()
