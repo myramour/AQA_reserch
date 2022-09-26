@@ -5,7 +5,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.herokuapp.DataTables2;
-import pageObjects.herokuapp.DataTablesPage;
 import pageObjects.herokuapp.NavigationPage;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 
 import static pageObjects.herokuapp.NavigationItems.DATA_TABLES;
 
-public class Lesson10_2test extends BaseTest {
+public class Lesson10_2Test extends BaseTest {
     @BeforeMethod
     public void precondition() {
         new NavigationPage()

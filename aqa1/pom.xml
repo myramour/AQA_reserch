@@ -39,6 +39,7 @@
             <version>${webdrivermanager.version}</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -54,3 +55,4 @@
         </plugins>
     </build>
 </project>
+
