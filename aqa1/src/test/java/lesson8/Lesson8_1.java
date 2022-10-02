@@ -8,7 +8,6 @@ import pageObjects.saucedemo.ProductPage;
 public class Lesson8_1 extends BaseTest {
     @Test
     public void login() {
-
         new LoginPage()
                 .open()
                 .enterUsername("performance_glitch_user")

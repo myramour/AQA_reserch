@@ -1,11 +1,8 @@
 package lesson9;
 
-import com.sun.net.httpserver.Authenticator;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.internal.thread.ThreadTimeoutException;
-import org.testng.util.RetryAnalyzerCount;
 import testNgUtils.Retry;
 
 
@@ -31,7 +28,8 @@ public class Lesson9_2Test {
         pause(2);
         System.out.println("Hello i'am test 3");
     }
-   //скипнется, потому что зависит от 3 теста, а он падает. Ускоряет процесс падения тестов
+
+    //скипнется, потому что зависит от 3 теста, а он падает. Ускоряет процесс падения тестов
     @Test(dependsOnMethods = "test3", priority = 4)
     public void test4() {
         System.out.println("Hello i'am test 4");

@@ -2,7 +2,6 @@ package pageObjects.herokuapp;
 
 import org.openqa.selenium.By;
 import pageObjects.baseObjects.BasePage;
-import pageObjects.saucedemo.LoginPage;
 
 public class NavigationPage extends BasePage {
     private By getByLink(String textLink) {

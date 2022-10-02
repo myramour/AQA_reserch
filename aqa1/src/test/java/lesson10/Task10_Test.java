@@ -5,9 +5,11 @@ import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.LoginPage;
 import pageObjects.saucedemo.ProductPage;
 
-/** Пробросить параметр из mvn command line внутрь теста
- * предача параметров через системные переменные */
-public class SaucedemoLogin_test extends BaseTest {
+/**
+ * Пробросить параметр из mvn command line внутрь теста
+ * предача параметров через системные переменные
+ */
+public class Task10_Test extends BaseTest {
     @Test
     public void login() {
         new LoginPage()

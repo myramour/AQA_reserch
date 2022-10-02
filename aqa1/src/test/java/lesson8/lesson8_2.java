@@ -1,14 +1,12 @@
 package lesson8;
 
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.herokuapp.*;
-import testNgUtils.Listener;
 
 import static pageObjects.herokuapp.NavigationItems.*;
-@Listeners(Listener.class)
+
 public class lesson8_2 extends BaseTest {
     @BeforeMethod
     public void precondition() {
@@ -33,7 +31,7 @@ public class lesson8_2 extends BaseTest {
         new InfiniteScrollPage().infiniteScroll(10);
     }
 
-    @Test(priority = 3,description ="context menu test", dependsOnMethods ="scrollPage_Test")
+    @Test(priority = 3, description = "context menu test", dependsOnMethods = "scrollPage_Test")
     public void contextMenu_Test() {
         new NavigationPage()
                 .navigateTo(CONTEXT_MENU);

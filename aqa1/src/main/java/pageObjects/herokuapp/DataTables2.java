@@ -1,6 +1,7 @@
 package pageObjects.herokuapp;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 
 import java.util.ArrayList;
@@ -9,8 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 public class DataTables2 extends BasePage {
+
     //отделяем хедеры и записи
-    private By table1 = By.id("table1");
+    private By table = By.id("table"); //для зафейленного теста(lesson11)
 
     private By headers = By.xpath("//table[@id='table1']//th");
 
@@ -20,6 +22,12 @@ public class DataTables2 extends BasePage {
 
     public DataTables2 clickTableColumn(String columnName) {
         driver.findElement(headers).findElement(By.xpath(".//span[text() = '" + columnName + "']")).click();
+        return this;
+    }
+
+    //фейл для проверки скриншота (lesson11)
+    public DataTables2 checkTableIsDisplayed() {
+        Assert.assertTrue(driver.findElement(table).isDisplayed());
         return this;
     }
     //создадим методы, которые будут брать данные из таблицы и помещать их в коллекции

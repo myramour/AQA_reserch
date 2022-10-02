@@ -1,23 +1,22 @@
 package lesson8;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.herokuapp.AddRemoveElementsPage;
 import pageObjects.herokuapp.NavigationPage;
-import testNgUtils.Listener;
 
-import static pageObjects.herokuapp.NavigationItems.*;
+import static pageObjects.herokuapp.NavigationItems.ADD_REMOVE_ELEMENTS;
 
-/** - Кликнуть один раз Add Element
- - Проверить что кнопка Delete добавилась
- - Кликнуть еще 5 раз Add Element
- - Проверить что отображается верное количество кнопок Delete
- - Очистить окно от кнопок Delete и проверить что эта кнопка не отображается после очистки */
-@Listeners(Listener.class)
+/**
+ * - Кликнуть один раз Add Element
+ * - Проверить что кнопка Delete добавилась
+ * - Кликнуть еще 5 раз Add Element
+ * - Проверить что отображается верное количество кнопок Delete
+ * - Очистить окно от кнопок Delete и проверить что эта кнопка не отображается после очистки
+ */
+
 public class AddRemove_test extends BaseTest {
     @Parameters("url")
     @BeforeMethod
