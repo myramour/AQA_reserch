@@ -19,8 +19,6 @@ public class BasketPage extends BasePage {
     private final By allProductName = By.cssSelector(".inventory_item_name");
     private final By removeBtn = By.xpath("//button[contains(text(),'Remove')]");
 
-    private final List<WebElement> allCostAndNameInCart = getWebDriver().findElements(By.cssSelector(".inventory_item_name, .inventory_item_price"));
-
     public BasketPage() {
         verifyPageUri();
     }
@@ -43,18 +41,6 @@ public class BasketPage extends BasePage {
 
     public String getProductCost(String productName) {  //1- приходит productName
         return getText(getElementProductCost(productName)); //6- целый элемент передается в метод getText
-    }
-
-    public BasketPage verifyProductCostAndName() {
-        List<String> expectedData = Arrays.asList(
-                "Sauce Labs Backpack",
-                "$29.99",
-                "Sauce Labs Fleece Jacket",
-                "$49.99",
-                "Sauce Labs Onesie",
-                "$7.99");
-        Assert.assertEquals(getText(allCostAndNameInCart), expectedData);
-        return this;
     }
 
     public String enterCartQuantity(String productName) {

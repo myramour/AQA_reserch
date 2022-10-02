@@ -1,7 +1,9 @@
 package pageObjects.baseObjects;
 
+import driver.UIElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static driver.SimpleDriver.getWebDriver;
 
@@ -36,6 +39,23 @@ public class BasePage {
                 .ignoring(StaleElementReferenceException.class);
     }
 
+    protected WebElement findElement(By locator) {
+        return driver.findElement(locator);
+    }
+
+    protected List<WebElement> findElements(By locator) {
+        return driver.findElements(locator);
+    }
+
+    protected void load(String url) { //метод для перехода по ссылке (вместо driver get )
+        System.out.println("Open page :: " + url);
+        driver.get(url);
+    }
+
+    protected String getPageUrl() { //возвращает ссылку
+        System.out.println("Get page url");
+        return driver.getCurrentUrl();
+    }
 
     protected void enter(WebElement webElement, String enterData) {
         System.out.println("I'm enter :: " + enterData + ", by web element :: " + webElement);
@@ -45,18 +65,19 @@ public class BasePage {
 
     protected void enter(By locator, CharSequence... enterData) {
         System.out.println("I'm enter :: " + enterData + ", by locator :: " + locator);
-        driver.findElement(locator).sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
-        driver.findElement(locator).sendKeys(enterData);
+        findElement(locator).sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
+        findElement(locator).sendKeys(enterData);
     }
 
     protected void click(By locator) {
         System.out.println("I'm click by :: " + locator);
-        driver.findElement(locator).click();
+        verifyElementClickable(locator);
+        findElement(locator).click();
     }
 
-    protected void click(WebElement webElement) {
+    protected void click(WebElement webElement) { //клики с оберткой
         System.out.println("I'm click by :: " + webElement);
-        webElement.click();
+        new UIElement(driver, wait, webElement).click(); //создаем инстанс объекта от UIElement
     }
 
     protected void clickAll(By locator) {
@@ -78,23 +99,34 @@ public class BasePage {
         }
     }
 
-
     protected void selectByText(By locator, String value) {
-        Select select = new Select(driver.findElement(locator));
+        Select select = new Select(findElement(locator));
         select.selectByVisibleText(value);
         System.out.println("I'm select by text :: " + value);
     }
 
     protected void selectByIndex(By locator, int value) {
-        Select select = new Select(driver.findElement(locator));
-        System.out.println("I'm select by index :: " + value);
+        Select select = new Select(findElement(locator));
         select.selectByIndex(value);
+        System.out.println("I'm select by index :: " + value);
     }
 
+    //лучще исп такой селект
+    protected void select(By locator, Integer index) {
+        System.out.println("Select by locator => " + locator + " with index => " + index);
+        Select select = new Select(findElement(locator));
+        select.selectByIndex(index);
+    }
+
+    protected void select(By locator, String value) {
+        System.out.println("Select by locator => " + locator + " with value => " + value);
+        Select select = new Select(findElement(locator));
+        select.selectByValue(value);
+    }
 
     protected String getText(By locator) {
         System.out.println("I'm get text by  :: " + locator);
-        return driver.findElement(locator).getText();
+        return findElement(locator).getText();
     }
 
     protected String getText(WebElement webElement) {
@@ -102,13 +134,69 @@ public class BasePage {
         return webElement.getText();
     }
 
-    protected List<String> getText(List<WebElement> elements) {
-        System.out.println("I'm get text by  :: " + elements);
-        List<String> actualData = new ArrayList<>();
-        elements.forEach(webElement -> {
-            actualData.add(webElement.getText());
-        });
-        return actualData;
+//    protected List<String> getTexts(By locator) {
+//        System.out.println("I'm get text by  :: " + locator);
+//        List<String> actualData = new ArrayList<>();
+//        for(WebElement webelement :driver.findElements(locator){
+//            actualData.add(webElement.getText());
+//        });
+//        return actualData;
+//    }
+
+    protected List<String> getTexts(By locator) { //проходим по каждому элементу из списка и забираем у него текст в коллекцию
+        System.out.println("I'm get texts by  :: " + locator);
+        return findElements(locator).stream().map(webElement -> webElement.getText()).collect(Collectors.toList());
+        //через stream() представили коллекцию веб элементов в качестве потока данных
+        //через map перебираем каждый элемент и переделываем его с типа webElement -> webElement.getText() в строку
+        //map представляет собой стрим,через  collect(Collectors.toList() переводим в лист
+    }
+
+    protected String getElementAttribute(By by, String attribute) { //получение атрибута элемента
+        System.out.println("Get element => " + by + ", attribute :: " + attribute);
+        return findElement(by).getAttribute(attribute);
+    }
+
+    protected List<String> getElementsAttribute(By by, String attribute) {
+        System.out.println("Get element => " + by + ", attribute :: " + attribute);
+        return findElements(by).stream().map(webElement -> webElement.getAttribute(attribute)).collect(Collectors.toList());
+    }
+
+    //говорит о состоянии элемента в текущий момент времени(спрашиваем о состоянии NotExist)
+    public Boolean elementNotExist(By by) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0)); //отключаем implicitlyWait(драйвер не ждет выполнения элемента)
+        for (int counter = 1; counter < 20; counter++) { //элемент может пропасть не сразу в динамическом контенте,поэтому делаем цикл
+            System.out.println("Wait element not exist count = " + counter);
+            if (findElements(by).size() == 0) { //если элемента нет findElements - потому что если элемент не наден вернет ошибку, а findElement просто пустой массив
+                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+                return true;
+            }
+            waitUntil(1); //если элемент виден, ждет 1с и снова спрашивает(так до 20 раз)
+        }
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20)); //подключаем обратно, чтобы его использовали другие методы
+        return false;
+    }
+
+    protected void waitVisibilityOfElement(By locator) { //ожидние что элемент будет виден
+        System.out.println("wait visibility of element => " + locator);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    protected void verifyElementTextToBe(By locator, String text) { //что есть текст
+        System.out.println("verify element text to be => " + locator);
+        wait.until(ExpectedConditions.textToBe(locator, text));
+    }
+
+    protected void verifyElementClickable(By locator) { //что элемент кликабельный
+        System.out.println("verify element clickable => " + locator);
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    private void waitUntil(Integer timeout) { //зыбит поток
+        try {
+            Thread.sleep(timeout * 1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

@@ -14,7 +14,7 @@ public class LoginPage extends BasePage {
     //методы возвращают ссылку на самого себя - те могут быть сигнатурами LoginPage
     //такая запись не очень, лучще выносить урлы на уроани параметров, что делает тесты более гибкими
     public LoginPage open() {
-        driver.get("https://www.saucedemo.com/");
+        load("https://www.saucedemo.com/"); //вместо driver.get
         return this; //this- каждый из методов возвращает ссылку на данный объект
     }
 
@@ -35,7 +35,8 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage verifyThatLoginPageIsClosed() {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(loginBtn));
+        Assert.assertTrue(elementNotExist(loginBtn));
+      //  wait.until(ExpectedConditions.invisibilityOfElementLocated(loginBtn)); - долгое ожидание, потому что Imlicitу драйвера все равно ждет что элемент появится
         return this;
     }
 
