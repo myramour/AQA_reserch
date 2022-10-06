@@ -58,6 +58,11 @@ public class BasketPage extends BasePage {
         return this;
     }
 
+    public BasketPage verifyBasketPage() {
+        Assert.assertTrue(waitVisibilityOfElements(continueShoppingBtn, checkoutBtn));
+        return this;
+    }
+
     public BasketPage verifyQuantityProductInCart(String productName) {
         Assert.assertEquals(enterCartQuantity(productName), "1");
         return this;
@@ -88,11 +93,9 @@ public class BasketPage extends BasePage {
         return this;
     }
 
-
     public BasketPage verifyProductIsRemove() {
         fluentWait(20, 1).until(driver -> ExpectedConditions.not(ExpectedConditions.visibilityOfElementLocated(allProductName)));
         return this;
     }
-
 
 }

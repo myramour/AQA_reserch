@@ -1,7 +1,10 @@
 package pageObjects.saucedemo;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
+
+import static driver.SimpleDriver.getWebDriver;
 
 public class HeaderPage extends BasePage {
     private final By basketBtn = By.className("shopping_cart_link");
@@ -29,6 +32,15 @@ public class HeaderPage extends BasePage {
     public HeaderPage clickAboutBtn() {
         click(aboutBtn);
         return this;
+    }
+    public HeaderPage verifyAboutPageUri() {
+        Assert.assertTrue(getWebDriver().getCurrentUrl().equals("https://saucelabs.com/"));
+        return this;
+    }
+
+    public HeaderPage returnBack() {
+        driver.navigate().back();
+      return this;
     }
 
     public HeaderPage clickLogoutBtn() {

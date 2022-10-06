@@ -2,6 +2,7 @@ package pageObjects.baseObjects;
 
 import driver.UIElement;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -9,10 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static driver.SimpleDriver.getWebDriver;
@@ -63,9 +61,14 @@ public class BasePage {
         webElement.sendKeys(enterData);
     }
 
-    protected void enter(By locator, CharSequence... enterData) {
+    protected void enter(By locator, CharSequence... enterData) { //вроде бы теперь должно работать с разными ОС(не точно)
         System.out.println("I'm enter :: " + enterData + ", by locator :: " + locator);
-        findElement(locator).sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
+        String os = System.getProperty("os.name");
+        if (os.contains("Mac")) {
+            findElement(locator).sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
+        } else {
+            findElement(locator).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+        }
         findElement(locator).sendKeys(enterData);
     }
 
@@ -142,15 +145,55 @@ public class BasePage {
 //        });
 //        return actualData;
 //    }
-
+    /** ВТОРОЙ ВАРИАНТ СБОРА ДАННЫХ ДЛЯ СОРТИРОВКИ ТАБЛИЦЫ ПО ЛОКАТОРУ */
     protected List<String> getTexts(By locator) { //проходим по каждому элементу из списка и забираем у него текст в коллекцию
         System.out.println("I'm get texts by  :: " + locator);
-        return findElements(locator).stream().map(webElement -> webElement.getText()).collect(Collectors.toList());
+        List<String> data =  findElements(locator).stream().map(webElement -> webElement.getText()).collect(Collectors.toList());
+        System.out.println("I'm actual data :: " + data);
+        return data;
         //через stream() представили коллекцию веб элементов в качестве потока данных
         //через map перебираем каждый элемент и переделываем его с типа webElement -> webElement.getText() в строку
         //map представляет собой стрим,через  collect(Collectors.toList() переводим в лист
     }
 
+    protected List<String> getSortAscendingByTexts(By locator) {
+        System.out.println("I'm sorting texts by  :: " + locator);
+        List<String> sortAscendingList = getTexts(locator);
+        System.out.println("I'm ascending sorted data :: " + sortAscendingList);
+         return sortAscendingList;
+    }
+
+    protected List<String> getSortDescendingByTexts(By locator) {
+        List<String> sortDescendingList = getTexts(locator);
+        Collections.sort(sortDescendingList,Collections.reverseOrder());
+        System.out.println("I'm descending sorted data :: " + sortDescendingList);
+        return sortDescendingList;
+    }
+
+    protected List<Double> getValues(By locator) {
+        List<Double> getData = findElements(locator).stream()
+                .map(webElement -> webElement.getText())
+                .map(webElement -> webElement.replace("$", ""))
+                .map(webElement -> webElement.replace(",", "."))
+                .map(Double::parseDouble).collect(Collectors.toList());
+        System.out.println("I'm get values by  :: " + getData);
+        return getData;
+    }
+
+    protected List<Double> getSortAscendingByValues(By locator) {
+        List<Double> sortAscendingList = getValues(locator);
+        Collections.sort(sortAscendingList);
+        System.out.println("I'm ascending sorted data :: " + sortAscendingList);
+        return sortAscendingList;
+    }
+
+    protected List<Double> getSortDescendingByValues(By locator) {
+        List<Double> sortDescendingList = getValues(locator);
+        Collections.sort(sortDescendingList, Collections.reverseOrder());
+        System.out.println("I'm descending sorted data :: " + sortDescendingList);
+        return sortDescendingList;
+    }
+/** END */
     protected String getElementAttribute(By by, String attribute) { //получение атрибута элемента
         System.out.println("Get element => " + by + ", attribute :: " + attribute);
         return findElement(by).getAttribute(attribute);
@@ -162,7 +205,7 @@ public class BasePage {
     }
 
     //говорит о состоянии элемента в текущий момент времени(спрашиваем о состоянии NotExist)
-    public Boolean elementNotExist(By by) {
+    protected Boolean elementNotExist(By by) {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0)); //отключаем implicitlyWait(драйвер не ждет выполнения элемента)
         for (int counter = 1; counter < 20; counter++) { //элемент может пропасть не сразу в динамическом контенте,поэтому делаем цикл
             System.out.println("Wait element not exist count = " + counter);
@@ -181,6 +224,13 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    protected boolean waitVisibilityOfElements(By... locators) { //ожидние что элемент будет виден
+        for (By locator : locators) {
+            System.out.println("wait visibility of element => " + locator);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        }
+        return true;
+    }
     protected void verifyElementTextToBe(By locator, String text) { //что есть текст
         System.out.println("verify element text to be => " + locator);
         wait.until(ExpectedConditions.textToBe(locator, text));

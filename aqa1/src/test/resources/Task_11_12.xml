@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo for lesson 11-12" thread-count="2" parallel="tests">
+
+    <parameter name="url" value="https://www.saucedemo.com/"></parameter>
+    <parameter name="username" value="standard_user"/>
+    <parameter name="password" value="secret_sauce"/>
+    <parameter name="productName" value="Sauce Labs Bolt T-Shirt"/>
+
+    <test name="ProductPage test set 1.2">
+        <classes>
+            <class name="task_11_12.SD_Header_Test"></class>
+        </classes>
+    </test>
+
+</suite>

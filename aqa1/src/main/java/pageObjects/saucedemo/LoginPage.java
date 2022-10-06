@@ -10,17 +10,24 @@ public class LoginPage extends BasePage {
     private final By username = By.id("user-name");
     private final By password = By.id("password");
     private final By loginBtn = By.id("login-button");
+    private final By message = By.xpath("//h3[@data-test='error']");
 
+    //pattern fluent chain of invocations
     //методы возвращают ссылку на самого себя - те могут быть сигнатурами LoginPage
-    //такая запись не очень, лучще выносить урлы на уроани параметров, что делает тесты более гибкими
-    public LoginPage open() {
+    // Используем для того, чтобы в тестах получать доступ к методам класса (продлжать вызывать методы на основе предыдущих результатов, делать запись в одну строку).
+    public LoginPage open() { // лучще выносить урлы на уроани параметров, что делает тесты более гибкими (см запись ниже)
         load("https://www.saucedemo.com/"); //вместо driver.get
         return this; //this- каждый из методов возвращает ссылку на данный объект
     }
 
     //для примера с параметризированными тестами
     public LoginPage open(String url) {//урл прописываем в xml файле
-        driver.get(url);
+        load(url);
+        return this;
+    }
+
+    public LoginPage verifyLoginPage() {
+        Assert.assertTrue(waitVisibilityOfElements(username, password, loginBtn));
         return this;
     }
 
@@ -46,13 +53,13 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage verifyErrorMessage() {
-        Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")), "Epic sadface: Sorry, this user has been locked out.");
+        Assert.assertEquals(getText(message), "Epic sadface: Sorry, this user has been locked out.");
         return this;
     }
 
     //для dataProvider
     public LoginPage verifyErrorMessage(String errorMessage) {
-        Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")), errorMessage);
+        Assert.assertEquals(getText(message), errorMessage);
         return this;
     }
 }
