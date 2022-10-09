@@ -13,7 +13,7 @@ import task_11_12.steps.ProductStep;
 public class SD_Checkout_Test extends BaseTest {
 
     @BeforeMethod
-    @Step("Login and navigate to product page")
+    @Step("Login by user: {username} , {password} and navigate to product page")
     @Parameters({"url", "username", "password", "productName"})
     public void preconditions(String url, String username, String password, String productName){
         get(LoginSteps.class).login(url, username, password);
@@ -22,9 +22,8 @@ public class SD_Checkout_Test extends BaseTest {
 
     @Test(dataProvider = "negative checkout data", description = "Test with negative checkout data")
     public void negativeCheckoutTest(String firstname, String lastname, String zipcode,String errorMessage) {
-        get(BasketPage.class).verifyBasketPage().verifyTitle().clickCheckout();
+        get(BasketPage.class).verifyTitle().clickCheckout();
         get(CheckoutOnePage.class)
-                .verifyCheckoutOne()
                 .verifyPageTitle()
                 .getFirstName(firstname)
                 .getLastName(lastname)
@@ -37,16 +36,14 @@ public class SD_Checkout_Test extends BaseTest {
     public void positiveCheckoutTest( @Optional("first") String firstname, @Optional("last") String lastname, @Optional("12345") String zipcode) {
         get(BasketPage.class).verifyBasketPage().verifyTitle().clickCheckout();
         get(CheckoutOnePage.class)
-                .verifyCheckoutOne()
                 .verifyPageTitle()
                 .getFirstName(firstname)
                 .getLastName(lastname)
                 .getZipCode(zipcode)
                 .clickContinueBtn();
-        get(CheckoutTwoPage.class).verifyCheckoutTwo().verifyPageTitle().clickFinishBtn();
-        get(CheckoutCompletePage.class).verifyCheckoutCompletePage().verifyPageTitle().verifyFinalPageTitle();
+        get(CheckoutTwoPage.class).verifyPageTitle().clickFinishBtn();
+        get(CheckoutCompletePage.class).verifyPageTitle().verifyFinalPageTitle();
     }
-
 
     @DataProvider(name = "negative checkout data")
     public Object[][] checkoutData() {

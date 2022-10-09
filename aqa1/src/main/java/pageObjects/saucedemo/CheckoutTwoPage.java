@@ -13,6 +13,7 @@ public class CheckoutTwoPage extends BasePage {
 
     public CheckoutTwoPage() {
         verifyPageUri();
+        verifyCheckoutTwo();
     }
 
     public void verifyPageUri() {

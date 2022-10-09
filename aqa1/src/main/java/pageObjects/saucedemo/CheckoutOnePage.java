@@ -16,6 +16,7 @@ public class CheckoutOnePage extends BasePage {
 
     public CheckoutOnePage() {
         verifyPageUri();
+        verifyCheckoutOne();
     }
 
     public void verifyPageUri() {

@@ -24,9 +24,8 @@ public class SD_Login_Test extends BaseTest {
                 .open(url);
     }
 
-    @Description("Test with all user data")
     @Link("https://www.saucedemo.com/")
-    @Test(dataProvider = "user data")
+    @Test(description = "Test with all user data", dataProvider = "user data")
     public void loginTest(String username, String password, String errorMessage) {
         get(LoginPage.class)
                 .verifyLoginPage()
@@ -44,9 +43,8 @@ public class SD_Login_Test extends BaseTest {
         }
     }
 
-    @Description("Test with negative user data")
     @Link("https://www.saucedemo.com/")
-    @Test(dataProvider = "negative user data")
+    @Test(description = "Test with negative user data", dataProvider = "negative user data")
     public void negativeLoginTest(String username, String password, String errorMessage) {
         get(LoginPage.class)
                 .verifyLoginPage()

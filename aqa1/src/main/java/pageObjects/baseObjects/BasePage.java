@@ -174,7 +174,7 @@ public class BasePage {
         List<Double> getData = findElements(locator).stream()
                 .map(webElement -> webElement.getText())
                 .map(webElement -> webElement.replace("$", ""))
-                .map(webElement -> webElement.replace(",", "."))
+                //.map(webElement -> webElement.replace(",", "."))
                 .map(Double::parseDouble).collect(Collectors.toList());
         System.out.println("I'm get values by  :: " + getData);
         return getData;

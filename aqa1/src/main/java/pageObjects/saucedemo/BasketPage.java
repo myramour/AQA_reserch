@@ -21,6 +21,7 @@ public class BasketPage extends BasePage {
 
     public BasketPage() {
         verifyPageUri();
+        verifyBasketPage();
     }
 
     private WebElement getElementCartItem(String productName) { //3 - формируется элемент на уровне productName
@@ -51,7 +52,6 @@ public class BasketPage extends BasePage {
         Assert.assertTrue(getWebDriver().getCurrentUrl().contains("cart.html"));
         return this;
     }
-
 
     public BasketPage verifyTitle() {
         Assert.assertEquals(getText(title), "YOUR CART");

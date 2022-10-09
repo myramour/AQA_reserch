@@ -62,5 +62,4 @@ public class FooterPage extends BasePage {
         Assert.assertTrue(driver.getWindowHandles().size() == 1);
         return this;
     }
-
 }

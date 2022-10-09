@@ -10,54 +10,47 @@ import pageObjects.saucedemo.BasketPage;
 import pageObjects.saucedemo.HeaderPage;
 import pageObjects.saucedemo.ProductPage;
 import task_11_12.steps.LoginSteps;
-import task_11_12.steps.ProductStep;
 
 
 public class SD_Cart_Test extends BaseTest {
 
     @BeforeMethod
-    @Step("Login and navigate to product page")
+    @Step("Login by user: {username} , {password}")
     @Parameters({"url", "username", "password"})
     public void preconditions(String url, String username, String password){
         get(LoginSteps.class).login(url, username, password);
-
     }
 
-    @Test(description = "Add and remove all products test")
+    @Test(description = "Test add and remove all products")
     public void addRemoveAllProductsTest() {
         get(ProductPage.class).addAllProductToBasket();
         get(HeaderPage.class).clickBasketBtn();
         get(BasketPage.class)
-                .verifyBasketPage()
                 .verifyTitle()
                 .removeAllProduct()
                 .verifyProductIsRemove();
     }
 
-    @Test(description = "test to add and remove products by name")
-    public void addProductTest(){
+    @Test(description = "Test to add and remove products by name")
+    public void addRemoveProductTest1(){
         get(ProductPage.class).addProductToBasket("Sauce Labs Bolt T-Shirt");
         get(HeaderPage.class).clickBasketBtn();
         get(BasketPage.class)
-                .verifyBasketPage()
                 .verifyTitle().verifyQuantityProductInCart("Sauce Labs Bolt T-Shirt")
                 .clickContinueShopping();
         get(ProductPage.class).addProductToBasket("Sauce Labs Bike Light");
         get(HeaderPage.class).clickBasketBtn();
         get(BasketPage.class)
-                .verifyBasketPage()
                 .removeProduct("Sauce Labs Bike Light")
                 .removeProduct("Sauce Labs Bolt T-Shirt")
                 .verifyProductIsRemove();
-
     }
 
     @Test(dataProvider = "product data", description = "Add and remove products with DataProvider test")
-    public void addRemoveProductsTest(String name) {
+    public void addRemoveProductTest2(String name) {
         get(ProductPage.class).addProductToBasket(name);
         get(HeaderPage.class).clickBasketBtn();
         get(BasketPage.class)
-                .verifyBasketPage()
                 .verifyTitle()
                 .removeProduct(name)
                 .verifyProductIsRemove()

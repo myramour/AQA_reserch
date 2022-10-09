@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
-import pageObjects.herokuapp.DropdownListPage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -93,25 +92,23 @@ public class ProductPage extends BasePage {
         return getText(getProductPrice(productName));
     }
 
-    public ProductPage sortNameAtoZ() {
+    public ProductPage VerifySortNameAtoZ() {
         Assert.assertEquals(getTexts(allProducts),getSortAscendingByTexts(allProducts));
         return this;
     }
 
-    public ProductPage sortNameZtoA() {
+    public ProductPage VerifySortNameZtoA() {
         Assert.assertEquals(getTexts(allProducts),getSortDescendingByTexts(allProducts));
         return this;
     }
 
-    public ProductPage sortPriceLowToHigh() {
+    public ProductPage VerifySortPriceLowToHigh() {
        Assert.assertEquals(getValues(allProductPrices),getSortAscendingByValues(allProductPrices));
         return this;
     }
 
-    public ProductPage sortPriceHighToLow() {
+    public ProductPage VerifySortPriceHighToLow() {
         Assert.assertEquals(getValues(allProductPrices),getSortDescendingByValues(allProductPrices));
         return this;
     }
-
-
 }

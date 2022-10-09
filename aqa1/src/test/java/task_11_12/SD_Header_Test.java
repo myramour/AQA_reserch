@@ -20,19 +20,19 @@ public class SD_Header_Test extends BaseTest {
         get(LoginSteps.class).login(url, username, password);
     }
 
-    @Test
+    @Test(description = "Test for verify log out")
     public void logOutTest() {
         get(HeaderPage.class).clickNavigationBtn().clickLogoutBtn();
         get(LoginPage.class).verifyLoginPage();
     }
 
-    @Test
+    @Test(description = "Test for verify open about page")
     public void aboutTest() {
         get(HeaderPage.class).clickNavigationBtn().clickAboutBtn().verifyAboutPageUri().returnBack();
         get(ProductPage.class).verifyProductPage();
     }
 
-    @Test
+    @Test(description = "Test for verify return to the Product page after click AllItems")
     @Parameters("productName")
     public void allItemsTest(String productName) {
         get(ProductStep.class).product(productName);
