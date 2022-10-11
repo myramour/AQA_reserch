@@ -16,8 +16,8 @@ public class HomePage extends BasePage {
         //this = new LoginPage
     }
 
-    public HomePage open(String url) {
-        load(url);
+    public HomePage open() { //для реализации с property
+        load();
         return this;
     }
 

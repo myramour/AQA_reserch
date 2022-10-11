@@ -26,8 +26,11 @@ public class Lesson10_2Test extends BaseTest {
                 .navigateTo(DATA_TABLES);
         new DataTables2().getTableRowsData().forEach(System.out::println);// для записи в столбик
         Map<String, List<String>> TablesData = new DataTables2().getTableData(); //вызываем всю мапу
-        //Map<String, List<String>> mapTableData = new DataTables2().clickTableColumn("Last Name").getTableData(); //сортируем колонку через клик и собираем данные
-        Map<String, List<String>> mapTableData = new DataTables2().checkTableIsDisplayedFallure().clickTableColumn("Last Name").getTableData(); //фейл(for lesson 11)
+        Map<String, List<String>> mapTableData = new DataTables2().clickTableColumn("Last Name").getTableData(); //сортируем колонку через клик и собираем данные
+
+        /** фейл(for lesson 11) -> */
+        //Map<String, List<String>> mapTableData = new DataTables2().checkTableIsDisplayedFailure().clickTableColumn("Last Name").getTableData();
+
         List<List<String>> tableData = new DataTables2().getTableRowsData();
         Assert.assertTrue(tableData.get(2).contains("$100.00")); //проверяем, что у 3 записи(у джавы 2) есть такая запись
         List<String> lastNameData = mapTableData.get("Last Name"); // берем  данные из мапы для столбца Last Name

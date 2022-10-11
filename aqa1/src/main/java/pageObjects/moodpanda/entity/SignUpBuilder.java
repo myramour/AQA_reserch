@@ -37,7 +37,7 @@ public class SignUpBuilder {
             return this;
         }
 
-        public Builder() {
+        public Builder() { //создание инстанса внешнего класса
             this.signUpBuilder = new SignUpBuilder();
         }
 

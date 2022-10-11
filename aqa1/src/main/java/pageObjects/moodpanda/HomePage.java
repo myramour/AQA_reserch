@@ -9,8 +9,8 @@ public class HomePage extends MoodPandaBasePage { //наследуемся от 
     private By getStartedBtn = By.partialLinkText("Get started");
     private By title = By.cssSelector("[class^=container] > p[class^='title ']");
 
-    public HomePage open(String url) {
-        load(url);
+    public HomePage open() {
+        load();
         isPageOpened();
         return this;
     }
