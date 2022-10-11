@@ -13,7 +13,7 @@ public class Task10_Test extends BaseTest {
     @Test
     public void login() {
         new LoginPage()
-                .open()
+                .openWithUrl()
                 .enterUsername(System.getProperty("username"))
                 .enterPassword(System.getProperty("password"))
                 .clickLoginBtn()

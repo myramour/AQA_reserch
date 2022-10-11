@@ -1,5 +1,6 @@
 package pageObjects.herokuapp;
 
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-
+@Log4j
 public class DragAndDropPage extends BasePage {
     private final WebElement elementA = driver.findElement(By.id("column-a"));
     private final WebElement elementB = driver.findElement(By.id("column-b"));

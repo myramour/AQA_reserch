@@ -225,7 +225,8 @@ public abstract class BasePage {
     protected List<Double> getValues(By locator) {
         List<Double> getData = findElements(locator).stream()
                 .map(webElement -> webElement.getText())
-                .map(webElement -> webElement.replace("$", ""))
+                .map(webElement -> webElement.replaceAll("[^\\d.]+", "")) //все, кроме цифр и точки, + совпадает один или более раз
+               // .map(webElement -> webElement.replace("$", ""))
                 //.map(webElement -> webElement.replace(",", "."))
                 .map(Double::parseDouble).collect(Collectors.toList());
         log.debug("I'm get values by  :: " + getData);
@@ -235,7 +236,8 @@ public abstract class BasePage {
     protected List<Double> getValues(List<WebElement> webElements) {
         List<Double> getData = webElements.stream()
                 .map(webElement -> webElement.getText())
-                .map(webElement -> webElement.replace("$", ""))
+                .map(webElement -> webElement.replaceAll("[^\\d.]+", ""))
+                //.map(webElement -> webElement.replace("$", ""))
                 .map(Double::parseDouble).collect(Collectors.toList());
         log.debug("I'm get values by  :: " + getData);
         return getData;

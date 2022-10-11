@@ -13,7 +13,7 @@ public class Login_test extends BaseTest {
     @Test
     public void test1() {
         new LoginPage()
-                .open()
+                .openWithUrl()
                 .enterUsername("standard_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn();
@@ -25,7 +25,7 @@ public class Login_test extends BaseTest {
     @Test
     public void test2() {
         new LoginPage()
-                .open()
+                .openWithUrl()
                 .enterUsername("locked_out_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn()
@@ -35,7 +35,7 @@ public class Login_test extends BaseTest {
     @Test
     public void test3() {
         new LoginPage()
-                .open()
+                .openWithUrl()
                 .enterUsername("problem_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn();
@@ -47,7 +47,7 @@ public class Login_test extends BaseTest {
     @Test
     public void test4() {
         new LoginPage()
-                .open()
+                .openWithUrl()
                 .enterUsername("performance_glitch_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn();

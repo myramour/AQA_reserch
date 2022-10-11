@@ -15,7 +15,7 @@ public class LoginPage extends BasePage {
     //pattern fluent chain of invocations
     //методы возвращают ссылку на самого себя - те могут быть сигнатурами LoginPage
     // Используем для того, чтобы в тестах получать доступ к методам класса (продлжать вызывать методы на основе предыдущих результатов, делать запись в одну строку).
-    public LoginPage open() { // лучще выносить урлы на уроани параметров, что делает тесты более гибкими (см запись ниже)
+    public LoginPage openWithUrl() { // лучще выносить урлы на уроани параметров, что делает тесты более гибкими (см запись ниже)
         load("https://www.saucedemo.com/"); //вместо driver.get
         return this; //this- каждый из методов возвращает ссылку на данный объект
     }
@@ -23,6 +23,11 @@ public class LoginPage extends BasePage {
     //для примера с параметризированными тестами
     public LoginPage open(String url) {//урл прописываем в xml файле
         load(url);
+        return this;
+    }
+
+    public LoginPage open() {
+        load();
         return this;
     }
 
@@ -38,6 +43,16 @@ public class LoginPage extends BasePage {
 
     public LoginPage enterPassword(String password) {
         enter(this.password, password);
+        return this;
+    }
+
+    public LoginPage enterUsername() {
+        enter(this.username, properties.getProperty("username"));
+        return this;
+    }
+
+    public LoginPage enterPassword() {
+        enter(this.password,  properties.getProperty("password"));
         return this;
     }
 
