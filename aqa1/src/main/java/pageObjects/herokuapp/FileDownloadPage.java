@@ -35,13 +35,13 @@ public class FileDownloadPage extends BasePage {
                 lastDownloadFile = files[i];
             }
         }
-        System.out.println("I'm download :: " + lastDownloadFile.getName());
+        log.debug("I'm download :: " + lastDownloadFile.getName());
         return lastDownloadFile;
     }
 
     public FileDownloadPage verifyLastFileInDirectory() {
         File lastFile = getLastDownloadFileInDirectory();
-        System.out.println("I'm found file :: " + lastFile.getName());
+        log.debug("I'm found file :: " + lastFile.getName());
         Assert.assertTrue(lastFile.exists()); //проверка
         lastFile.deleteOnExit(); //удаление
         return this;

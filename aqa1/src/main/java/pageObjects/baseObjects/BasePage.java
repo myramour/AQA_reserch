@@ -100,6 +100,17 @@ public abstract class BasePage {
         }
     }
 
+    protected void clickAll(WebElement... elements) {
+        for (WebElement element : elements) {
+            log.debug("I'm click by :: " + element);
+            List<WebElement> buttons = new ArrayList<>();
+            buttons.add(element);
+            for (WebElement button : buttons) {
+                button.click();
+            }
+        }
+    }
+
     //или так
     protected void clickAll(By... elements) { //в качестве аргумента(ов) для этого метода могут быть переданы ноль или более объектов By (или их массив).
         for (By element : elements) {
@@ -136,6 +147,18 @@ public abstract class BasePage {
         select.selectByValue(value);
     }
 
+    protected void select(WebElement element, Integer index) {
+        log.debug("Select by locator => " + element + " with index => " + index);
+        Select select = new Select(element);
+        select.selectByIndex(index);
+    }
+
+    protected void select(WebElement element, String value) {
+        log.debug("Select by locator => " + element + " with value => " + value);
+        Select select = new Select(element);
+        select.selectByVisibleText(value);
+    }
+
     protected String getText(By locator) {
         log.debug("I'm get text by  :: " + locator);
         return findElement(locator).getText();
@@ -165,6 +188,11 @@ public abstract class BasePage {
         //map представляет собой стрим,через  collect(Collectors.toList() переводим в лист
     }
 
+    protected List<String> getTexts(List<WebElement> webElements) {
+        log.debug("I'm get texts by  :: " + webElements);
+        return webElements.stream().map(webElement -> webElement.getText()).collect(Collectors.toList());
+    }
+
     protected List<String> getSortAscendingByTexts(By locator) {
         log.debug("I'm sorting texts by  :: " + locator);
         List<String> sortAscendingList = getTexts(locator);
@@ -172,8 +200,23 @@ public abstract class BasePage {
          return sortAscendingList;
     }
 
+    protected List<String> getSortAscendingByTexts(List<WebElement> webElements) {
+        log.debug("I'm sorting texts by  :: " + webElements);
+        List<String> sortAscendingList = getTexts(webElements);
+        log.debug("I'm ascending sorted data :: " + sortAscendingList);
+        return sortAscendingList;
+    }
+
+
     protected List<String> getSortDescendingByTexts(By locator) {
         List<String> sortDescendingList = getTexts(locator);
+        Collections.sort(sortDescendingList,Collections.reverseOrder());
+        log.debug("I'm descending sorted data :: " + sortDescendingList);
+        return sortDescendingList;
+    }
+
+    protected List<String> getSortDescendingByTexts(List<WebElement> webElements) {
+        List<String> sortDescendingList = getTexts(webElements);
         Collections.sort(sortDescendingList,Collections.reverseOrder());
         log.debug("I'm descending sorted data :: " + sortDescendingList);
         return sortDescendingList;
@@ -189,8 +232,24 @@ public abstract class BasePage {
         return getData;
     }
 
+    protected List<Double> getValues(List<WebElement> webElements) {
+        List<Double> getData = webElements.stream()
+                .map(webElement -> webElement.getText())
+                .map(webElement -> webElement.replace("$", ""))
+                .map(Double::parseDouble).collect(Collectors.toList());
+        log.debug("I'm get values by  :: " + getData);
+        return getData;
+    }
+
     protected List<Double> getSortAscendingByValues(By locator) {
         List<Double> sortAscendingList = getValues(locator);
+        Collections.sort(sortAscendingList);
+        log.debug("I'm ascending sorted data :: " + sortAscendingList);
+        return sortAscendingList;
+    }
+
+    protected List<Double> getSortAscendingByValues(List<WebElement> webElements) {
+        List<Double> sortAscendingList = getValues(webElements);
         Collections.sort(sortAscendingList);
         log.debug("I'm ascending sorted data :: " + sortAscendingList);
         return sortAscendingList;
@@ -202,6 +261,14 @@ public abstract class BasePage {
         log.debug("I'm descending sorted data :: " + sortDescendingList);
         return sortDescendingList;
     }
+
+    protected List<Double> getSortDescendingByValues(List<WebElement> webElements) {
+        List<Double> sortDescendingList = getValues(webElements);
+        Collections.sort(sortDescendingList, Collections.reverseOrder());
+        log.debug("I'm descending sorted data :: " + sortDescendingList);
+        return sortDescendingList;
+    }
+
 /** END */
     protected String getElementAttribute(By by, String attribute) { //получение атрибута элемента
         log.debug("Get element => " + by + ", attribute :: " + attribute);
@@ -240,6 +307,15 @@ public abstract class BasePage {
         }
         return true;
     }
+
+    protected boolean waitVisibilityOfElements(WebElement... webElements) {
+        for (WebElement webElement : webElements) {
+            log.debug("wait visibility of element => " + webElement);
+            wait.until(ExpectedConditions.visibilityOf(webElement));
+        }
+        return true;
+    }
+
     protected void verifyElementTextToBe(By locator, String text) { //что есть текст
         log.debug("verify element text to be => " + locator);
         wait.until(ExpectedConditions.textToBe(locator, text));

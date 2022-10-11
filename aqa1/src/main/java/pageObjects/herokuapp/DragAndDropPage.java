@@ -60,13 +60,13 @@ public class DragAndDropPage extends BasePage {
     }
 
     public DragAndDropPage verifyChangeA() {
-        System.out.println(elementA.getText());
+        log.debug(elementA.getText());
         Assert.assertTrue(elementA.getText().equals("B"));
         return this;
     }
 
     public DragAndDropPage verifyChangeB() {
-        System.out.println(elementB.getText());
+        log.debug(elementB.getText());
         Assert.assertTrue(elementB.getText().equals("B"));
         return this;
     }
