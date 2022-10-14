@@ -1,4 +1,4 @@
-package task_11_12.steps;
+package task11_12_SDAllure.steps;
 
 import pageObjects.baseObjects.BasePage;
 import pageObjects.saucedemo.HeaderPage;

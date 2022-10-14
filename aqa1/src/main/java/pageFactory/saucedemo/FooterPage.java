@@ -55,13 +55,13 @@ public class FooterPage extends BasePage {
 
     public FooterPage verifyPageFacebook() {
         Assert.assertTrue(getWebDriver().getCurrentUrl().contains("saucelabs"));
-        Assert.assertEquals(driver.findElement(By.tagName("h1")).getText(), "Sauce Labs");
+        Assert.assertEquals(findElement(By.tagName("h1")).getText(), "Sauce Labs");
         return this;
     }
 
     public FooterPage verifyPageLinkedin() {
         Assert.assertTrue(getWebDriver().getCurrentUrl().contains("linkedin.com"));
-        Assert.assertEquals(driver.findElement(By.tagName("h1")).getText(), "Присоединитесь к LinkedIn");
+        Assert.assertEquals(findElement(By.tagName("h1")).getText(), "Присоединитесь к LinkedIn");
         return this;
     }
 

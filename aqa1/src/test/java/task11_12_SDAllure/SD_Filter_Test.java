@@ -1,12 +1,11 @@
-package task_11_12;
+package task11_12_SDAllure;
 
-import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.ProductPage;
-import task_11_12.steps.LoginSteps;
+import task11_12_SDAllure.steps.LoginSteps;
 
 public class SD_Filter_Test extends BaseTest {
 

@@ -1,5 +1,6 @@
 package pageObjects.saucedemo;
 
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 import static driver.SimpleDriver.getWebDriver;
 
 //описываем страницу с товарами
+@Log4j
 public class ProductPage extends BasePage {
     private final By title = By.xpath("//span[@class='title']");
     private final By getFilterOptions = By.tagName("option");
@@ -38,10 +40,12 @@ public class ProductPage extends BasePage {
     //тк uri уникальна для данной страницы, проверку можно вызвать при создании сущности
     public ProductPage() {
         verifyPageUri();
+        verifyProductPageIsOpened();
+        verifyPageTitle();
     }
 
-    public ProductPage verifyProductPage() {
-        Assert.assertTrue(waitVisibilityOfElements(addToCartBtn, logo));
+    public ProductPage verifyProductPageIsOpened() {
+       waitVisibilityOfElements(addToCartBtn, logo);
         return this;
     }
 
@@ -54,7 +58,6 @@ public class ProductPage extends BasePage {
     public ProductPage verifyPageTitle() {
         Assert.assertEquals(getText(title), "PRODUCTS");
         return this;
-
     }
 
     public ProductPage verifyFilterOptions() {
@@ -69,6 +72,13 @@ public class ProductPage extends BasePage {
 
     public ProductPage addProductToBasket(String productName) { //добавить продукт по имени в корзину
         click(getAddToCartBtn(productName));
+        return this;
+    }
+
+    public ProductPage addProductToBasketForCount(int count) {
+        for (int i=0; i<count; i++) {
+            click(addToCartBtn);
+        }
         return this;
     }
 

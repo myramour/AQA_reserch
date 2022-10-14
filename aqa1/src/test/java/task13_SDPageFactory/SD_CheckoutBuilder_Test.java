@@ -1,4 +1,4 @@
-package task_13;
+package task13_SDPageFactory;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;

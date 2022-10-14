@@ -1,4 +1,4 @@
-package task_11_12;
+package task11_12_SDAllure;
 
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;

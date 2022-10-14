@@ -1,4 +1,4 @@
-package task_13;
+package task13_SDPageFactory;
 
 import org.testng.annotations.*;
 import pageFactory.saucedemo.ProductPage;

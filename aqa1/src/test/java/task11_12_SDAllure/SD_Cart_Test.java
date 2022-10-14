@@ -1,4 +1,4 @@
-package task_11_12;
+package task11_12_SDAllure;
 
 import io.qameta.allure.Step;
 import org.testng.annotations.BeforeMethod;
@@ -9,7 +9,7 @@ import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.BasketPage;
 import pageObjects.saucedemo.HeaderPage;
 import pageObjects.saucedemo.ProductPage;
-import task_11_12.steps.LoginSteps;
+import task11_12_SDAllure.steps.LoginSteps;
 
 
 public class SD_Cart_Test extends BaseTest {
@@ -28,7 +28,7 @@ public class SD_Cart_Test extends BaseTest {
         get(BasketPage.class)
                 .verifyTitle()
                 .removeAllProduct()
-                .verifyProductIsRemove();
+                .verifyBasketIsEmpty();
     }
 
     @Test(description = "Test to add and remove products by name")
@@ -43,7 +43,7 @@ public class SD_Cart_Test extends BaseTest {
         get(BasketPage.class)
                 .removeProduct("Sauce Labs Bike Light")
                 .removeProduct("Sauce Labs Bolt T-Shirt")
-                .verifyProductIsRemove();
+                .verifyBasketIsEmpty();
     }
 
     @Test(dataProvider = "product data", description = "Add and remove products with DataProvider test")
@@ -53,7 +53,7 @@ public class SD_Cart_Test extends BaseTest {
         get(BasketPage.class)
                 .verifyTitle()
                 .removeProduct(name)
-                .verifyProductIsRemove()
+                .verifyBasketIsEmpty()
                 .clickContinueShopping();
     }
 

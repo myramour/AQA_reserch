@@ -38,7 +38,7 @@ public class SauceDemoCart_test extends BaseTest {
         new BasketPage()
                 .verifyTitle()
                 .removeAllProduct()
-                .verifyProductIsRemove()
+                .verifyBasketIsEmpty()
                 .clickContinueShopping();
     }
 
@@ -54,7 +54,7 @@ public class SauceDemoCart_test extends BaseTest {
         new BasketPage()
                 .verifyTitle()
                 .removeProduct(name)
-                .verifyProductIsRemove()
+                .verifyBasketIsEmpty()
                 .clickContinueShopping();
     }
 

@@ -42,6 +42,6 @@ public class AddAndRemove_test extends BaseTest {
                 .removeProduct("Sauce Labs Backpack")
                 .removeProduct("Sauce Labs Fleece Jacket")
                 .removeProduct("Sauce Labs Onesie")
-                .verifyProductIsRemove();
+                .verifyBasketIsEmpty();
     }
 }

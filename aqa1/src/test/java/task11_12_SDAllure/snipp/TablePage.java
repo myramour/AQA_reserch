@@ -1,9 +1,8 @@
-package task_11_12.snipp;
+package task11_12_SDAllure.snipp;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
-import pageObjects.herokuapp.DataTables2;
 
 import java.util.ArrayList;
 import java.util.HashMap;

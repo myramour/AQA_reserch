@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+/**Builder pattern from Lombok*/
+
 @Getter
 @ToString
 @Builder(builderClassName = "HomeBuilder", setterPrefix = "with", buildMethodName = "create") //добавление префикса и изменение buildMethodName

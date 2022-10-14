@@ -21,10 +21,10 @@ public class CheckoutCompletePage extends BasePage {
     @FindBy(xpath = "//span[@class='title']")
     private WebElement title ;
 
-    public CheckoutCompletePage() { /** Loadable Page pattern */
+    public CheckoutCompletePage() {
         PageFactory.initElements(driver, this);
         verifyPageUri();
-        verifyCheckoutCompletePage();
+        verifyCheckoutCompletePage();  /** Loadable Page pattern */
     }
 
     public void verifyPageUri() {
@@ -32,7 +32,7 @@ public class CheckoutCompletePage extends BasePage {
     }
 
     public CheckoutCompletePage verifyCheckoutCompletePage() {
-        Assert.assertTrue(waitVisibilityOfElements(backHomeBtn, finishTitle));
+        waitVisibilityOfElements(backHomeBtn, finishTitle);
         return this;
     }
 

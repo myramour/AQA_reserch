@@ -1,4 +1,4 @@
-package task_11_12;
+package task11_12_SDAllure;
 
 import io.qameta.allure.Step;
 import org.testng.annotations.*;
@@ -7,8 +7,8 @@ import pageObjects.saucedemo.BasketPage;
 import pageObjects.saucedemo.CheckoutCompletePage;
 import pageObjects.saucedemo.CheckoutOnePage;
 import pageObjects.saucedemo.CheckoutTwoPage;
-import task_11_12.steps.LoginSteps;
-import task_11_12.steps.ProductStep;
+import task11_12_SDAllure.steps.LoginSteps;
+import task11_12_SDAllure.steps.ProductStep;
 
 public class SD_Checkout_Test extends BaseTest {
 
@@ -25,9 +25,9 @@ public class SD_Checkout_Test extends BaseTest {
         get(BasketPage.class).verifyTitle().clickCheckout();
         get(CheckoutOnePage.class)
                 .verifyPageTitle()
-                .getFirstName(firstname)
-                .getLastName(lastname)
-                .getZipCode(zipcode)
+                .enterFirstName(firstname)
+                .enterLastName(lastname)
+                .enterZipCode(zipcode)
                 .clickContinueBtn()
                 .verifyErrorMessage(errorMessage);
     }
@@ -37,9 +37,9 @@ public class SD_Checkout_Test extends BaseTest {
         get(BasketPage.class).verifyBasketPage().verifyTitle().clickCheckout();
         get(CheckoutOnePage.class)
                 .verifyPageTitle()
-                .getFirstName(firstname)
-                .getLastName(lastname)
-                .getZipCode(zipcode)
+                .enterFirstName(firstname)
+                .enterLastName(lastname)
+                .enterZipCode(zipcode)
                 .clickContinueBtn();
         get(CheckoutTwoPage.class).verifyPageTitle().clickFinishBtn();
         get(CheckoutCompletePage.class).verifyPageTitle().verifyFinalPageTitle();

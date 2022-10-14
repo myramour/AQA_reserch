@@ -49,7 +49,7 @@ public class HeaderPage extends BasePage {
     }
 
     public HeaderPage clickResetAppBtn() {
-        click(resetAppBtn);
+        findElement(resetAppBtn).click();
         return this;
     }
 }
