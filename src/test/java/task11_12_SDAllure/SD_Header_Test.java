@@ -33,9 +33,8 @@ public class SD_Header_Test extends BaseTest {
     }
 
     @Test(description = "Test for verify return to the Product page after click AllItems")
-    @Parameters("productName")
-    public void allItemsTest(String productName) {
-        get(ProductStep.class).product(productName);
+    public void allItemsTest() {
+        get(ProductStep.class).product(properties.getProperty("productName1"));
         get(HeaderPage.class).clickNavigationBtn().clickAllItemsBtn();
         get(ProductPage.class).verifyProductPageIsOpened();
     }

@@ -5,7 +5,6 @@ import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 import pageObjects.saucedemo.lombok.User;
 
-
 public class LoginPage extends BasePage {
     private final By username = By.id("user-name");
     private final By password = By.id("password");
@@ -53,7 +52,7 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage enterPassword() {
-        enter(this.password, properties.getProperty("password"));
+        enter(this.password,  properties.getProperty("password"));
         return this;
     }
 

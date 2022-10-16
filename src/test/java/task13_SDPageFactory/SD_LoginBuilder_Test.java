@@ -13,19 +13,17 @@ public class SD_LoginBuilder_Test extends BaseTest {
     LoginPage loginPage;
 
     @BeforeMethod
-    @Parameters("url")
-    public void precondition(String url){
+    public void precondition(){
         loginPage = new LoginPage();
-        loginPage.open(url);
+        loginPage.open();
     }
 
     @Test (description = "Test(Builder Pattern) with standard user data {username}, {password}")
-    @Parameters({"username", "password"})
-    public void standardUserTest(String username, String password){
+    public void standardUserTest(){
 
         LoginBuilder loginBuilder = new LoginBuilder.Builder()
-                .withUsername(username)
-                .withPassword(password).build();
+                .withUsername(properties.getProperty("username"))
+                .withPassword(properties.getProperty("password")).build();
 
         loginPage.enterData(loginBuilder).clickLoginBtn();
         new ProductPage().verifyProductPageIsOpened();
