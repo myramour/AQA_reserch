@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="SauceDemo tests for lesson 11-12" thread-count="4" parallel="tests">
+
+    <parameter name="config" value="saucedemo"/>
+
+    <test name="Login test set 1.1">
+        <classes>
+            <class name="task14_SDProperties.Checkout_Test"></class>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Snipp data table tasks" >
+
+    <test name="Data table test">
+        <classes>
+            <class name="task11_12_SDAllure.snipp.Table_Test"></class>
+        </classes>
+    </test>
+
+</suite>

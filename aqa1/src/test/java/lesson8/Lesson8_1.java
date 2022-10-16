@@ -8,9 +8,8 @@ import pageObjects.saucedemo.ProductPage;
 public class Lesson8_1 extends BaseTest {
     @Test
     public void login() {
-
         new LoginPage()
-                .open()
+                .openWithUrl()
                 .enterUsername("performance_glitch_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn()

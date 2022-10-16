@@ -1,5 +1,6 @@
 package pageObjects.herokuapp;
 
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -10,15 +11,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-
+@Log4j
 public class DragAndDropPage extends BasePage {
-    private final WebElement elementA =driver.findElement(By.id("column-a"));
-    private final WebElement elementB =driver.findElement(By.id("column-b"));
+    private final WebElement elementA = driver.findElement(By.id("column-a"));
+    private final WebElement elementB = driver.findElement(By.id("column-b"));
 
 
-    /** Срабатывает только в том случае, если в момент выполнения теста курсор находится там,
-     * куда нужно перетащить элемент */
-    public DragAndDropPage DragAndDropA(){
+    /**
+     * Срабатывает только в том случае, если в момент выполнения теста курсор находится там,
+     * куда нужно перетащить элемент
+     */
+    public DragAndDropPage DragAndDropA() {
         actions.dragAndDrop(elementA, elementB).build().perform();
         actions.clickAndHold(elementA).moveToElement(elementB).release().build().perform();
         return this;
@@ -27,44 +30,44 @@ public class DragAndDropPage extends BasePage {
 
     public DragAndDropPage FromAToB() throws IOException {
 
-        String filePath = System.getProperty("user.dir")+"/files/drag_and_drop_helper.js";
+        String filePath = System.getProperty("user.dir") + "/files/drag_and_drop_helper.js";
         StringBuffer buffer = new StringBuffer();
         String line;
         BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
-        while((line = bufferedReader.readLine())!=null)
+        while ((line = bufferedReader.readLine()) != null)
             buffer.append(line);
         String javaScript = buffer.toString();
 
         javaScript = javaScript + "$('#column-a').simulateDragDrop({ dropTarget: '#column-b'});";
-        ((JavascriptExecutor)driver).executeScript(javaScript);
+        ((JavascriptExecutor) driver).executeScript(javaScript);
 
         return this;
     }
 
     public DragAndDropPage FromBToA() throws IOException {
 
-        String filePath = System.getProperty("user.dir")+"/files/drag_and_drop_helper.js";
+        String filePath = System.getProperty("user.dir") + "/files/drag_and_drop_helper.js";
         StringBuffer buffer = new StringBuffer();
         String line;
         BufferedReader br = new BufferedReader(new FileReader(filePath));
-        while((line = br.readLine())!=null)
+        while ((line = br.readLine()) != null)
             buffer.append(line);
         String javaScript = buffer.toString();
 
         javaScript = javaScript + "$('#column-b').simulateDragDrop({ dropTarget: '#column-a'});";
-        ((JavascriptExecutor)driver).executeScript(javaScript);
+        ((JavascriptExecutor) driver).executeScript(javaScript);
 
         return this;
     }
 
-    public DragAndDropPage verifyChangeA(){
-        System.out.println(elementA.getText());
+    public DragAndDropPage verifyChangeA() {
+        log.debug(elementA.getText());
         Assert.assertTrue(elementA.getText().equals("B"));
         return this;
     }
 
-    public DragAndDropPage verifyChangeB(){
-        System.out.println(elementB.getText());
+    public DragAndDropPage verifyChangeB() {
+        log.debug(elementB.getText());
         Assert.assertTrue(elementB.getText().equals("B"));
         return this;
     }

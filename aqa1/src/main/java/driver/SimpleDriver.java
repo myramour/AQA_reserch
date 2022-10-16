@@ -10,13 +10,13 @@ import java.util.HashMap;
 
 public class SimpleDriver {
     // для распараллеливания драйвера на снесколько потоков, т е для каждого потока создается свой драйвер
-    private static  ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
+    private static ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
     //Блок инициализации - код, который будет выполнен при вызове данного класса
     {
         if (webDriver.get() == null) {
             //WebDriverManager.chromedriver().setup();//создание chromedriver
-           // webDriver = new ChromeDriver(getChromeOptions());// сетапим в chromedriver параметры запуска браузера сюда
+            // webDriver = new ChromeDriver(getChromeOptions());// сетапим в chromedriver параметры запуска браузера сюда
             WebDriverManager.chromedriver().setup();
             webDriver.set(new ChromeDriver(getChromeOptions()));
             webDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
@@ -35,7 +35,7 @@ public class SimpleDriver {
         return webDriver.get();
     }
 
-    public static void closeWebDriver(){
+    public static void closeWebDriver() {
         if (webDriver.get() != null) {
             webDriver.get().close(); // закрыть текущее окно
             webDriver.get().quit(); //выйти из драйвера и закрыть все окна (напрямую закрывает браузер)

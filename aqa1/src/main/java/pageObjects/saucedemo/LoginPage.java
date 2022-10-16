@@ -1,29 +1,39 @@
 package pageObjects.saucedemo;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
-
-import java.time.Duration;
+import pageObjects.saucedemo.lombok.User;
 
 
 public class LoginPage extends BasePage {
     private final By username = By.id("user-name");
     private final By password = By.id("password");
     private final By loginBtn = By.id("login-button");
+    private final By message = By.xpath("//h3[@data-test='error']");
 
-   //методы возвращают ссылку на самого себя - те могут быть сигнатурами LoginPage
-    //такая запись не очень, лучще выносить урлы на уроани параметров, что делает тесты более гибкими
-    public LoginPage open() {
-        driver.get("https://www.saucedemo.com/");
+    //pattern fluent chain of invocations
+    //методы возвращают ссылку на самого себя - те могут быть сигнатурами LoginPage
+    // Используем для того, чтобы в тестах получать доступ к методам класса (продлжать вызывать методы на основе предыдущих результатов, делать запись в одну строку).
+    public LoginPage openWithUrl() { // лучще выносить урлы на уроани параметров, что делает тесты более гибкими (см запись ниже)
+        load("https://www.saucedemo.com/"); //вместо driver.get
         return this; //this- каждый из методов возвращает ссылку на данный объект
     }
 
     //для примера с параметризированными тестами
     public LoginPage open(String url) {//урл прописываем в xml файле
-        driver.get(url);
+        load(url);
+        verifyLoginPageIsOpened();
+        return this;
+    }
+
+    public LoginPage open() {
+        load();
+        return this;
+    }
+
+    public LoginPage verifyLoginPageIsOpened() {
+        waitVisibilityOfElements(username, password, loginBtn);
         return this;
     }
 
@@ -37,8 +47,26 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public LoginPage verifyThatLoginPageIsClosed(){
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(loginBtn));
+    public LoginPage enterUsername() {
+        enter(this.username, properties.getProperty("username"));
+        return this;
+    }
+
+    public LoginPage enterPassword() {
+        enter(this.password, properties.getProperty("password"));
+        return this;
+    }
+
+   //для реализации с Lombok Builder pattern
+    public LoginPage enterData(User user){
+        enterUsername(user.getUsername());
+        enterPassword(user.getPassword());
+        return this;
+    }
+
+    public LoginPage verifyThatLoginPageIsClosed() {
+        Assert.assertTrue(elementNotExist(loginBtn));
+      //  wait.until(ExpectedConditions.invisibilityOfElementLocated(loginBtn)); - долгое ожидание, потому что Imlicitу драйвера все равно ждет что элемент появится
         return this;
     }
 
@@ -47,14 +75,14 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public LoginPage verifyErrorMessage(){
-        Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")),"Epic sadface: Sorry, this user has been locked out.");
+    public LoginPage verifyErrorMessage() {
+        Assert.assertEquals(getText(message), "Epic sadface: Sorry, this user has been locked out.");
         return this;
     }
 
     //для dataProvider
-    public LoginPage verifyErrorMessage(String errorMessage){
-        Assert.assertEquals(getText(By.xpath("//h3[@data-test='error']")),errorMessage);
+    public LoginPage verifyErrorMessage(String errorMessage) {
+        Assert.assertEquals(getText(message), errorMessage);
         return this;
     }
 }

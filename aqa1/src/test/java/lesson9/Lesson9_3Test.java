@@ -3,9 +3,8 @@ package lesson9;
 import org.testng.annotations.*;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.LoginPage;
-import testNgUtils.Listener;
 
-@Listeners(Listener.class) // если прописать тут,то будет работать только с указанным классом, если в xml, то там можно для всего сюта
+//@Listeners(Listener.class) //для примера как подключить листинер к классу с тестами. если прописать тут,то будет работать только с указанным классом, если в xml, то там можно для всего сюта
 
 public class Lesson9_3Test extends BaseTest {
     @Parameters("url") //прописываем параметр, котрый пробрасываем

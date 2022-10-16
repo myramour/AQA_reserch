@@ -8,22 +8,24 @@ import pageObjects.saucedemo.HeaderPage;
 import pageObjects.saucedemo.LoginPage;
 import pageObjects.saucedemo.ProductPage;
 
-/** 1 тест на добавление товара в корзину
- * 1 тест на удаление товара из корзины */
+/**
+ * 1 тест на добавление товара в корзину
+ * 1 тест на удаление товара из корзины
+ */
 
 public class AddAndRemove_test extends BaseTest {
 
     @BeforeClass
     public void login() {
         new LoginPage()
-                .open()
+                .openWithUrl()
                 .enterUsername("standard_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn();
     }
 
     @Test
-    public void test1(){
+    public void test1() {
         new ProductPage()
                 .verifyPageTitle()
                 .verifyFilterOptions()
@@ -40,6 +42,6 @@ public class AddAndRemove_test extends BaseTest {
                 .removeProduct("Sauce Labs Backpack")
                 .removeProduct("Sauce Labs Fleece Jacket")
                 .removeProduct("Sauce Labs Onesie")
-                .verifyProductIsRemove();
+                .verifyBasketIsEmpty();
     }
 }

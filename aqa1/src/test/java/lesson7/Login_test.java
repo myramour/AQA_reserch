@@ -5,13 +5,15 @@ import pageObjects.baseObjects.BaseTest;
 import pageObjects.saucedemo.LoginPage;
 import pageObjects.saucedemo.ProductPage;
 
-/** 4 теста на логин со всеми пользователями */
+/**
+ * 4 теста на логин со всеми пользователями
+ */
 
 public class Login_test extends BaseTest {
     @Test
-    public void test1(){
+    public void test1() {
         new LoginPage()
-                .open()
+                .openWithUrl()
                 .enterUsername("standard_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn();
@@ -21,9 +23,9 @@ public class Login_test extends BaseTest {
     }
 
     @Test
-    public void test2(){
+    public void test2() {
         new LoginPage()
-                .open()
+                .openWithUrl()
                 .enterUsername("locked_out_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn()
@@ -31,9 +33,9 @@ public class Login_test extends BaseTest {
     }
 
     @Test
-    public void test3(){
+    public void test3() {
         new LoginPage()
-                .open()
+                .openWithUrl()
                 .enterUsername("problem_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn();
@@ -43,9 +45,9 @@ public class Login_test extends BaseTest {
     }
 
     @Test
-    public void test4(){
+    public void test4() {
         new LoginPage()
-                .open()
+                .openWithUrl()
                 .enterUsername("performance_glitch_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn();

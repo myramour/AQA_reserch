@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Lesson 13" thread-count="3" parallel="tests">
+
+    <test name="Mood panda tests (PageFactory)">
+        <classes>
+            <class name="lesson13.LoginPageFactory_Test"/>
+        </classes>
+    </test>
+
+    <test name="Mood panda tests (Component)">
+        <classes>
+            <class name="lesson13.LoginComponent_Test"/>
+        </classes>
+    </test>
+
+    <test name="Mood panda tests (Value Object)">
+        <classes>
+            <class name="lesson13.SignUpValueObject_Test"/>
+        </classes>
+    </test>
+
+</suite>

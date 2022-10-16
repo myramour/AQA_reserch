@@ -1,15 +1,18 @@
 package lesson8;
 
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 import pageObjects.baseObjects.BaseTest;
 import pageObjects.herokuapp.InputsPage;
 import pageObjects.herokuapp.NavigationPage;
-import testNgUtils.Listener;
 
-import static pageObjects.herokuapp.NavigationItems.*;
+import static pageObjects.herokuapp.NavigationItems.INPUTS;
 
-/** Провести тестирование поля Number с использованием классов эквивалентности */
-@Listeners(Listener.class)
+/**
+ * Провести тестирование поля Number с использованием классов эквивалентности
+ */
 public class Inputs_test extends BaseTest {
     @Parameters("url")
     @BeforeMethod
@@ -29,8 +32,8 @@ public class Inputs_test extends BaseTest {
                 .setUpAndVerify(0, 150);
     }
 
-    @Test(priority = 5, description = "Multiple Windows test2",dataProvider = "value data", dependsOnMethods = "test1")
-    public void test2 (String value, int startValue, int countIteration) {
+    @Test(priority = 5, description = "Multiple Windows test2", dataProvider = "value data", dependsOnMethods = "test1")
+    public void test2(String value, int startValue, int countIteration) {
         new NavigationPage()
                 .navigateTo(INPUTS);
         new InputsPage()
@@ -43,11 +46,11 @@ public class Inputs_test extends BaseTest {
     @DataProvider(name = "value data")
     public Object[][] getData() {
         return new Object[][]{
-                {"0",0,150},
-                {"1",1,200},
-                {"-1",-1,100},
-                {"10",10,120},
-                {"15432",15432,10}
+                {"0", 0, 150},
+                {"1", 1, 200},
+                {"-1", -1, 100},
+                {"10", 10, 120},
+                {"15432", 15432, 10}
         };
     }
 }

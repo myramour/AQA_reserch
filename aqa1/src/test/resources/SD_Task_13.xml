@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="SauceDemo task for lesson 13" thread-count="2" parallel="tests">
+
+    <parameter name="url" value="https://www.saucedemo.com/"></parameter>
+    <parameter name="username" value="standard_user"/>
+    <parameter name="password" value="secret_sauce"/>
+    <parameter name="productName" value="Sauce Labs Bike Light"/>
+    <parameter name="firstname" value="FirstName"/>
+    <parameter name="lastname" value="LastName"/>
+    <parameter name="zipcode" value="12345"/>
+
+    <test name="Value Object pattern tests set 1.1">
+        <classes>
+            <class name="task13_SDPageFactory.SD_LoginValueObject_Test"></class>
+            <class name="task13_SDPageFactory.SD_CheckoutValueObject_Test"></class>
+        </classes>
+    </test>
+
+    <test name="Builder pattern tests set 1.2">
+        <classes>
+            <class name="task13_SDPageFactory.SD_LoginBuilder_Test"></class>
+            <class name="task13_SDPageFactory.SD_CheckoutBuilder_Test"></class>
+        </classes>
+    </test>
+
+</suite>

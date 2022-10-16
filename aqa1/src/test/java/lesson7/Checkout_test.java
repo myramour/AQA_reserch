@@ -10,7 +10,7 @@ public class Checkout_test extends BaseTest {
     @BeforeClass
     public void login() {
         new LoginPage()
-                .open()
+                .openWithUrl()
                 .enterUsername("standard_user")
                 .enterPassword("secret_sauce")
                 .clickLoginBtn();
@@ -25,17 +25,17 @@ public class Checkout_test extends BaseTest {
                 .clickBasketBtn();
     }
 
-        @Test
-        public void test1(){
+    @Test
+    public void test1() {
         new BasketPage()
                 .verifyTitle()
                 .clickCheckout();
-        new CheckoutPage()
-                .getFirstName("Firstname")
-                .getLastName("LastName")
-                .getZipCode("12345")
-                .clickContinueBtn()
-                .clickFinishBtn()
-                .verifyFinalPageTitle();
+        new CheckoutOnePage()
+                .enterFirstName("Firstname")
+                .enterLastName("LastName")
+                .enterZipCode("12345")
+                 .clickContinueBtn();
+        new CheckoutTwoPage().clickFinishBtn();
+        new CheckoutCompletePage().verifyFinalPageTitle();
     }
 }
