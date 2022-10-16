@@ -12,19 +12,17 @@ public class SD_CheckoutBuilder_Test extends BaseTest {
     LoginPage loginPage;
 
     @BeforeMethod
-    @Parameters("url")
-    public void precondition(String url){
+    public void precondition(){
         loginPage= new LoginPage();
-        loginPage.open(url);
+        loginPage.open();
     }
 
     @Test(description = "Test (Builder Pattern) :: with standard user data {username}, {password}")
-    @Parameters({"username", "password", "firstname", "lastname", "zipcode"})
-    public void checkoutTest(String username, String password, String firstname, String lastname, String zipcode){
+    public void checkoutTest(){
 
         LoginBuilder loginBuilder = new LoginBuilder.Builder()
-                .withUsername(username)
-                .withPassword(password)
+                .withUsername(properties.getProperty("username"))
+                .withPassword(properties.getProperty("password"))
                 .build();
 
         loginPage.enterData(loginBuilder).clickLoginBtn();
@@ -36,14 +34,15 @@ public class SD_CheckoutBuilder_Test extends BaseTest {
         new BasketPage().clickCheckout();
 
         CheckoutBuilder checkoutBuilder = new CheckoutBuilder.Builder()
-                .withFirstName(firstname)
-                .withLastName(lastname)
-                .withZipCode(zipcode)
+                .withFirstName(properties.getProperty("firstname"))
+                .withLastName(properties.getProperty("lastname"))
+                .withZipCode(properties.getProperty("zipcode"))
                 .build();
 
         new CheckoutOnePage().enterData(checkoutBuilder).clickContinueBtn();
         new CheckoutTwoPage().clickFinishBtn();
         new CheckoutCompletePage().verifyCheckoutCompletePage();
+        new HeaderPage().clickNavigationBtn().clickResetAppBtn();
     }
 }
 

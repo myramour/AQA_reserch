@@ -299,6 +299,11 @@ public abstract class BasePage {
         return false;
     }
 
+    protected Boolean elementNotExist(WebElement webElement) {
+        fluentWait(20, 1).until(driver -> ExpectedConditions.not(ExpectedConditions.visibilityOfAllElements(webElement)));
+        return true;
+    }
+
     protected void waitVisibilityOfElement(By locator) { //ожидние что элемент будет виден
         log.debug("wait visibility of element => " + locator);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));

@@ -29,8 +29,8 @@ public class LoginPage extends BasePage {
     }
 
 
-    public LoginPage open(String url) {//урл прописываем в xml файле
-        load(url);
+    public LoginPage open() {
+        load();
         verifyLoginPageIsOpened();
         return this;
     }
@@ -62,10 +62,10 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-//    public LoginPage verifyThatLoginPageIsClosed() {
-//        Assert.assertTrue(elementNotExist(loginBtn));
-//        return this;
-//    }
+    public LoginPage verifyThatLoginPageIsClosed() {
+        Assert.assertTrue(elementNotExist(loginBtn));
+        return this;
+    }
 
     public LoginPage clickLoginBtn() {
         click(loginBtn);

@@ -13,19 +13,18 @@ public class SD_LoginValueObject_Test extends BaseTest {
     Login_VObject login_VObject;
 
     @BeforeMethod
-    @Parameters("url")
-    public void precondition(String url){
+
+    public void precondition(){
         loginPage= new LoginPage();
-        loginPage.open(url);
+        loginPage.open();
     }
 
     @Test(description = "Test(Value Object) with standard user data {username}, {password}")
-    @Parameters({"username", "password"})
-    public void standardUserTest(String username, String password){
+    public void standardUserTest(){
 
         login_VObject = new Login_VObject(){{
-            setUsername(username);
-            setPassword(password);
+            setUsername(properties.getProperty("username"));
+            setPassword(properties.getProperty("password"));
         }};
         loginPage.enterData(login_VObject).clickLoginBtn();
         new ProductPage().verifyProductPageIsOpened();

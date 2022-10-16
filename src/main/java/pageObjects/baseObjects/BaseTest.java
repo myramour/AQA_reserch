@@ -14,15 +14,14 @@ import java.util.Properties;
 
 import static driver.DriverManagerFactory.getManager;
 import static propertyHelper.PropertyReader.getProperties;
-
-import static driver.SimpleDriver.closeWebDriver;
+import static driver.DriverManager.*;
 
 // класс содержит методы, которые могут быть многократно использованы в конкретных классах страниц
 @Listeners({Listener.class, InvokedMethodListener.class, ExtentReportListener.class})
 @Log4j
 public abstract class BaseTest {
-    protected Properties properties;
 
+    protected Properties properties;
     @BeforeTest
     public void setup() {
         log.debug("I'm started new wed driver!");

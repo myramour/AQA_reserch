@@ -11,7 +11,6 @@ import pageObjects.saucedemo.HeaderPage;
 import pageObjects.saucedemo.ProductPage;
 import task11_12_SDAllure.steps.LoginSteps;
 
-
 public class SD_Cart_Test extends BaseTest {
 
     @BeforeMethod
