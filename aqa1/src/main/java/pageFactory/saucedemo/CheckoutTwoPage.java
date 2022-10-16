@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;;
 
 public class CheckoutTwoPage extends BasePage {
 
@@ -27,7 +27,7 @@ public class CheckoutTwoPage extends BasePage {
     }
 
     public void verifyPageUri() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("checkout-step-two.html"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("checkout-step-two.html"));
     }
 
     public CheckoutTwoPage verifyCheckoutTwo() {

@@ -1,6 +1,6 @@
 package pageObjects.baseObjects;
 
-import driver.SimpleDriver;
+import io.github.bonigarcia.wdm.config.DriverManagerType;
 import lombok.extern.log4j.Log4j;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -12,6 +12,7 @@ import testNgUtils.Listener;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
+import static driver.DriverManagerFactory.getManager;
 import static propertyHelper.PropertyReader.getProperties;
 
 import static driver.SimpleDriver.closeWebDriver;
@@ -25,8 +26,9 @@ public abstract class BaseTest {
     @BeforeTest
     public void setup() {
         log.debug("I'm started new wed driver!");
-        new SimpleDriver(); //instance объекта обращение к конструктору объекта
         properties = getProperties();
+        //new SimpleDriver(); //instance объекта обращение к конструктору объекта (старая реализация)
+        getManager(DriverManagerType.valueOf(properties.getProperty("browser").toUpperCase()));//передаем тип браузера из проперти valueOf- через имя
     }
 
     //дженерик для создания инстанс, предоставляет обобщение для создания новой сущности

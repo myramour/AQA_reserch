@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import pageObjects.baseObjects.BasePage;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 
 public class FooterPage extends BasePage {
 
@@ -49,18 +49,18 @@ public class FooterPage extends BasePage {
     }
 
     public FooterPage verifyPageTwitter() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("saucelabs"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("saucelabs"));
         return this;
     }
 
     public FooterPage verifyPageFacebook() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("saucelabs"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("saucelabs"));
         Assert.assertEquals(findElement(By.tagName("h1")).getText(), "Sauce Labs");
         return this;
     }
 
     public FooterPage verifyPageLinkedin() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("linkedin.com"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("linkedin.com"));
         Assert.assertEquals(findElement(By.tagName("h1")).getText(), "Присоединитесь к LinkedIn");
         return this;
     }

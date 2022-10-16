@@ -1,8 +1,7 @@
 package pageObjects.moodpanda;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import pageObjects.baseObjects.BasePage;
+
 
 public class HomePage extends MoodPandaBasePage { //наследуемся от абстрактного класса,который насдедуется от BasePage и подтягивает методы
 

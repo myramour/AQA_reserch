@@ -9,7 +9,7 @@ import pageObjects.baseObjects.BasePage;
 
 import java.util.List;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 @Log4j
 public class BasketPage extends BasePage {
     private final By checkoutBtn = By.id("checkout");
@@ -26,7 +26,7 @@ public class BasketPage extends BasePage {
     }
 
     private WebElement getElementCartItem(String productName) { //3 - формируется элемент на уровне productName
-        return getWebDriver().findElement(By.xpath("//*[@class = 'inventory_item_name' and text() = '" + productName + "']//ancestor::div[@class='cart_item']"));
+        return findElement(By.xpath("//*[@class = 'inventory_item_name' and text() = '" + productName + "']//ancestor::div[@class='cart_item']"));
     }
 
     private WebElement getElementProductCost(String productName) { // 2 - передается productName, затем обращение к родительскому getElementCartItem
@@ -50,7 +50,7 @@ public class BasketPage extends BasePage {
     }
 
     public BasketPage verifyPageUri() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("cart.html"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("cart.html"));
         return this;
     }
 

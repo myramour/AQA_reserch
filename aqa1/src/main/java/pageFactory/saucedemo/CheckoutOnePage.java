@@ -1,6 +1,5 @@
 package pageFactory.saucedemo;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -9,7 +8,7 @@ import pageFactory.saucedemo.entity.CheckoutBuilder;
 import pageFactory.saucedemo.entity.Checkout_VObject;
 import pageObjects.baseObjects.BasePage;
 
-import static driver.SimpleDriver.getWebDriver;
+import static driver.DriverManager.getDriver;
 
 public class CheckoutOnePage extends BasePage {
 
@@ -38,7 +37,7 @@ public class CheckoutOnePage extends BasePage {
     }
 
     public void verifyPageUri() {
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("checkout-step-one.html"));
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("checkout-step-one.html"));
     }
 
     public CheckoutOnePage verifyCheckoutOne() {
