@@ -1,10 +1,18 @@
 pipeline {
     agent any
     stages {
+       stage('Build') {
+              steps {
+                   cleanWs()
+                    checkout scm
+                     echo "Building ${env.JOB_NAME}..."
+              }
+       }
         stage('Run tests') {
               agent {
                  dockerfile {
-                    args '-u root --shm-size=1g'
+                    reuseNode true
+                    args '-u root'
                  }
               }
              steps{
@@ -14,6 +22,8 @@ pipeline {
             }
             post {
                always {
+                      sh 'chown -R 1003:1003 ./target/allure-results'
+                      archiveArtifacts artifacts: 'target/allure-results/*',
                    archiveArtifacts artifacts: 'target/logs/*', allowEmptyArchive: true
                }
             }
@@ -21,7 +31,15 @@ pipeline {
     }
     post{
         always {
-            allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
+            script {
+               allure([
+               includeProperties: false,
+               jdk: '',
+               properties: [],
+               reportBuildPolicy: 'ALWAYS',
+               results: [[path: 'target/allure-results']]
+                   ])
+               }
+            }
         }
-    }
-}
+   }
