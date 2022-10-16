@@ -11,7 +11,6 @@ public class Listener implements ITestListener {
     @Override
     public void onStart(ITestContext context) { //ITestContext - интерфейс, котопый содержит всю информацию о тесте и о параметризации внутри xml
         Reporter.log(context.getSuite().getXmlSuite().getTest()); // получаем текст свита и записываем в лог
-        System.out.println(context.getSuite().getParameter("config"));
         // <уcловие> ? <если уcловие = true> : <если уcловие = false>
         String propertyName = context.getSuite().getParameter("config") == null ? System.getProperty("config") : context.getSuite().getParameter("config"); // получаем "config" из из системы или из свита
         new PropertyReader(propertyName);//передаем название файла из параметра "config", который прописываем в xml
