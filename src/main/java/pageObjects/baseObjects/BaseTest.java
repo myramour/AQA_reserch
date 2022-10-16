@@ -28,7 +28,8 @@ public abstract class BaseTest {
         log.debug("I'm started new wed driver!");
         properties = getProperties();
         //new SimpleDriver(); //instance объекта обращение к конструктору объекта (старая реализация)
-        getManager(DriverManagerType.valueOf(properties.getProperty("browser").toUpperCase()));//передаем тип браузера из проперти valueOf- через имя
+        System.out.println(properties.containsKey("browser"));
+        getManager(DriverManagerType.valueOf(properties.containsKey("browser") ? properties.getProperty("browser").toUpperCase() : "CHROME"));//передаем тип браузера из проперти valueOf- через имя
     }
 
     //дженерик для создания инстанс, предоставляет обобщение для создания новой сущности
