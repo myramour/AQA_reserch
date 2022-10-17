@@ -78,15 +78,14 @@
             <version>${dataformat.version}</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M4</version>
+                <version>3.0.0-M3</version>
                 <configuration>
-            <suiteXmlFiles>
+                    <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/${suiteXml}.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
@@ -109,6 +108,5 @@
             </plugin>
         </plugins>
     </build>
-    
 </project>
 
