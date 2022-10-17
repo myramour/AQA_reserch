@@ -14,9 +14,9 @@ public class ChromeDriverManager extends DriverManager{
     public void createDriver() {
         WebDriver driver;
         Properties properties = getProperties();
-        ChromeOptions chromeOptions = new ChromeOptions();
+        ChromeOptions chromeOptions = new ChromeOptions().setHeadless(true);
         chromeOptions.addArguments(properties.getProperty("browser.configs")); //для запуска в headless режиме
-        System.setProperty("driver.chrome.whitelistedIps", "");
+        System.setProperty("webdriver.chrome.whitelistedIps", "");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(chromeOptions);
         webDriver.set(driver); //сетап для внешнего драйвера
