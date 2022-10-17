@@ -11,8 +11,6 @@ pipeline {
         stage('Run tests') {
             agent {
                    dockerfile {
-                      sh ''export M2_HOME=/opt/homebrew/Cellar/maven/3.8.6/libexec
-                                                            export PATH=$PATH:$M2_HOME/bin''
                        reuseNode true
                        args '-u root'
                    }
