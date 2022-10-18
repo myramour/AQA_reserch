@@ -17,9 +17,7 @@ pipeline {
        }
     }
     post{
-        always {
             archiveArtifacts artifacts: 'target/logs/*', allowEmptyArchive: true
             allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
-        }
     }
 }
