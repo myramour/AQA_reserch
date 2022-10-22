@@ -21,8 +21,14 @@ public class SelenideBaseTest {
         properties = getProperties();
         return driver().hasWebDriverStarted() ? page(page) : open(Configuration.baseUrl, page);
     }
-}
+
 // page не создает драйвер, но возвращает инстанс
 //open создает драйвер и возвращает инстанс
 //hasWebDriverStarted() спрашивает состояние драйвера
 // когда драйвер не создан(первый запуск тестов), выполняется open :: создает драйвер и инстанс класса. Дальнейшие get создают только инстанс класса
+
+    protected <T> T get(Class<T> page, String url) {
+        properties = getProperties();
+        return driver().hasWebDriverStarted() ? page(page) : open(url, page);
+    }
+}

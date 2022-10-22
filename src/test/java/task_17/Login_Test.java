@@ -36,7 +36,6 @@ public class Login_Test extends SelenideBaseTest {
 
     }
 
-
         @DataProvider(name = "login data")
     public Object [][] data(){
         return new Object[][] {
