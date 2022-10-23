@@ -3,6 +3,7 @@ package pageObjects.moodpanda_Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import pageObjects.baseObjects.SelenideBasePage;
 
 
 import static com.codeborne.selenide.Condition.*;
@@ -10,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.webdriver;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
-public class LoginPage {
+public class LoginPage extends SelenideBasePage {
 
     private final SelenideElement email = $("[type='text']");
     private final SelenideElement password = $("[type='password']");
@@ -22,47 +23,46 @@ public class LoginPage {
     private final SelenideElement forgotBtn = $(By.partialLinkText("Forgot password"));
     private final SelenideElement cantLoginBtn = $(By.partialLinkText("I can't login"));
 
+    public LoginPage() {
+        verifyPageUri();
+    }
     public LoginPage verifyPageUri() {
         webdriver().shouldHave(urlContaining("login"));
         return this;
     }
 
     public LoginPage enterEmail(String email) {
-        this.email.sendKeys(Keys.chord(Keys.COMMAND, "a"));
-        this.email.sendKeys(Keys.chord(Keys.DELETE));
-        this.email.sendKeys(email);
+        enter(this.email, email);
         return this;
     }
 
     public LoginPage enterPassword(String password) {
-        this.password.sendKeys(Keys.chord(Keys.COMMAND, "a"));
-        this.password.sendKeys(Keys.chord(Keys.DELETE));
-        this.password.sendKeys(password);
+        enter(this.password, password);
         return this;
     }
 
     public LoginPage clickLogin() {
-        this.loginBtn.click();
+       click(loginBtn);
         return this;
     }
 
     public LoginPage clickDontAccount() {
-        this.dontAccountBtn.click();
+       click(dontAccountBtn);
         return this;
     }
 
     public LoginPage clickForgotPassword() {
-        this.forgotBtn.click();
+       click(forgotBtn);
         return this;
     }
 
     public LoginPage clickCantLogin() {
-        this.cantLoginBtn.click();
+       click(cantLoginBtn);
         return this;
     }
 
     public LoginPage verify() {
-        this.cantLoginBtn.click();
+        click(cantLoginBtn);
         return this;
     }
 

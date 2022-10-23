@@ -18,6 +18,7 @@ public class SelenideBaseTest {
     protected Properties properties;
 
     protected <T> T get(Class<T> page) {
+        T instance = null;
         properties = getProperties();
         return driver().hasWebDriverStarted() ? page(page) : open(Configuration.baseUrl, page);
     }
@@ -28,6 +29,7 @@ public class SelenideBaseTest {
 // когда драйвер не создан(первый запуск тестов), выполняется open :: создает драйвер и инстанс класса. Дальнейшие get создают только инстанс класса
 
     protected <T> T get(Class<T> page, String url) { //позволяет напрямую пробрасывать урл
+        T instance = null;
         properties = getProperties();
         return driver().hasWebDriverStarted() ? page(page) : open(url, page);
     }

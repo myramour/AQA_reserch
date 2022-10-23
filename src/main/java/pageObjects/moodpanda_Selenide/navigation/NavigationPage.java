@@ -3,23 +3,24 @@ package pageObjects.moodpanda_Selenide.navigation;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import pageObjects.baseObjects.SelenideBasePage;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.webdriver;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
-public class NavigationPage {
+public class NavigationPage extends SelenideBasePage {
     private final SelenideElement signUpBtn = $(By.partialLinkText("Sign up"));
     private final SelenideElement loginBtn = $(By.partialLinkText("Login"));
     private final SelenideElement title = $(By.xpath("//p[contains(@class,'title is-size-1')]"));
 
     public NavigationPage clickSignUp(){
-        this.signUpBtn.click();
+       click(signUpBtn);
         return this;
     }
 
     public NavigationPage clickLogin(){
-        this.loginBtn.click();
+       click(loginBtn);
         return this;
     }
 

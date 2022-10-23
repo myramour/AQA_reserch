@@ -27,7 +27,7 @@ public class SignUp_Test extends SelenideBaseTest {
                 .withPassword(password)
                 .withCheckbox(check).create();
 
-        get(SignUpPage.class).verifyPageUri().checkInformingText().enterData(signUp).clickSignUpMe();
+        get(SignUpPage.class).checkInformingText().enterData(signUp).clickSignUpMe();
         if (signUp.getCheckbox() == false) {
             get(SignUpPage.class).checkAlertIfCheckboxUncheck().checkAlertValidation(alert);
         } else if (signUp.getCheckbox() == true) {
@@ -35,7 +35,7 @@ public class SignUp_Test extends SelenideBaseTest {
         }
     }
 
-    @Test(description = "Sign up tests with all required fields",dataProvider = "data")
+    @Test(description = "Sign up tests with all required fields", dataProvider = "data")
     public void positiveDataTest(String firstname, String lastname, String email, String password, Boolean check, String alert) {
 
         SignUp signUp = new SignUp.SignUpBuilder()
@@ -45,7 +45,7 @@ public class SignUp_Test extends SelenideBaseTest {
                 .withPassword(password)
                 .withCheckbox(check).create();
 
-        get(SignUpPage.class).verifyPageUri().checkInformingText()
+        get(SignUpPage.class).checkInformingText()
                 .enterData(signUp).clickSignUpMe()
                 .checkAlertValidation(alert);
     }

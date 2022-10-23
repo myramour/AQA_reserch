@@ -19,5 +19,6 @@ public class SelenideListener implements ITestListener {
     public void setUpSelenideConfigs() {
         Configuration.baseUrl = getProperties().getProperty("url");
         Configuration.browser = getProperties().containsKey("browser") ? getProperties().getProperty("browser") : Configuration.browser;
+        Configuration.headless = getProperties().containsKey("browser.configs") ? Boolean.parseBoolean(getProperties().getProperty("browser.configs")) : Configuration.headless;
     }
 }

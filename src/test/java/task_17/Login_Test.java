@@ -26,13 +26,14 @@ public class Login_Test extends SelenideBaseTest {
                 .verifyValidationAlert(validationError);
     }
 
-    @Test(description = "Tests with correct credentials :: {email}, {password}")
+    @Test(description = "Login and logout test with correct credentials :: {email}, {password}")
     public void positiveDataTest(){
         get(LoginPage.class)
                 .enterEmail(properties.getProperty("validEmail"))
                 .enterPassword(properties.getProperty("validPassword"))
                 .clickLogin();
-        get(FeedNavigationPage.class).verifyPageTitle().verifyPageUri();
+        get(FeedNavigationPage.class).clickLogout();
+        get(LoginPage.class).verifyPageUri();
 
     }
 
