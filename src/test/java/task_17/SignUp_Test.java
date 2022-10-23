@@ -4,7 +4,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pageObjects.baseObjects.SelenideBaseTest;
-import pageObjects.moodpanda_Selenide.NavigationPage;
+import pageObjects.moodpanda_Selenide.navigation.NavigationPage;
 import pageObjects.moodpanda_Selenide.SignUpPage;
 import pageObjects.moodpanda_Selenide.lombok.SignUp;
 

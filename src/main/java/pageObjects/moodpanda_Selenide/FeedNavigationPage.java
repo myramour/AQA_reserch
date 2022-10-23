@@ -26,7 +26,7 @@ public class FeedNavigationPage {
     }
 
     public FeedNavigationPage verifyPageTitle() {
-        this.title.shouldBe(Condition.visible, Duration.ofSeconds(10)).shouldHave(Condition.matchText("This is a community. Be kind."));
+        this.title.shouldBe(Condition.visible).shouldHave(Condition.matchText("This is a community. Be kind."));
 
         return this;
     }

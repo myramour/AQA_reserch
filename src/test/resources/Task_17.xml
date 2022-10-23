@@ -7,7 +7,7 @@
 
     <test name="Login test set 1.1">
         <classes>
-            <class name="task_17.SignUp_Test"></class>
+            <class name="task_17.YourDashboard_Test"></class>
         </classes>
     </test>
 </suite>
