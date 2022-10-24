@@ -7,9 +7,19 @@ import pageObjects.moodpanda_Selenide.navigation.LinksEnum;
 import pageObjects.moodpanda_Selenide.navigation.NavigationPage;
 import static pageObjects.moodpanda_Selenide.navigation.LinksEnum.*;
 
+/** (*) Написать тест по навигации
+ Пройти по всем табам
+ Home
+ What?
+ How?
+ About
+ Contact us
+ Проверить что контент этих страниц загрузился
+ */
+
 public class Navigation_Test  extends SelenideBaseTest {
 
-    @Test(description = "Go to all navigation page and verify then all tab was opened with Switch case")
+    @Test(description = "Go to all navigation page and verify then all tab was opened with Switch Case")
     public void navigationTestWithSwitchCase() {
         get(NavigationPage.class)
                 .goToItemAndVerify(What)

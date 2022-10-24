@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.DataProvider;
 //связыает Steps and feature files
 @CucumberOptions(
-        features = {"src/test/resources/features"},
+        features = {"src/test/resources/features/Moodpanda.feature"},
         tags = "@smoke",
         plugin = { //отвечает за отчеты
                 "json:target/cucumber.json",

@@ -3,9 +3,7 @@ package pageObjects.baseObjects;
 import com.codeborne.selenide.SelenideElement;
 import driver.UIElement;
 import lombok.extern.log4j.Log4j;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.Properties;
 
@@ -15,6 +13,7 @@ import static propertyHelper.PropertyReader.getProperties;
 
 @Log4j
 public abstract class SelenideBasePage {
+    protected WebDriver driver;
     protected Properties properties;
 
     protected SelenideBasePage() {
@@ -38,6 +37,5 @@ public abstract class SelenideBasePage {
         log.debug("I'm click by :: " + element);
         element.should(enabled).click();
     }
-
 
 }

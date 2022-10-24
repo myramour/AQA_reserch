@@ -8,7 +8,7 @@ import pageObjects.moodpanda_Selenide.FeedNavigationPage;
 import pageObjects.moodpanda_Selenide.HomePage;
 import pageObjects.moodpanda_Selenide.LoginPage;
 
-
+/** Написать 3 теста авторизацию */
 public class Login_Test extends SelenideBaseTest {
     @BeforeTest
     public void precondition(){
@@ -37,7 +37,7 @@ public class Login_Test extends SelenideBaseTest {
 
     }
 
-        @DataProvider(name = "login data")
+    @DataProvider(name = "login data")
     public Object [][] data(){
         return new Object[][] {
                 {"test", "test", "Invalid email address", "", "One or more validation errors occurred."},

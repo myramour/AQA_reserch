@@ -9,7 +9,7 @@ import pageObjects.moodpanda_Selenide.SignUpPage;
 import pageObjects.moodpanda_Selenide.lombok.SignUp;
 
 import java.lang.reflect.Method;
-
+/** Написать 3 теста регистрацию */
 public class SignUp_Test extends SelenideBaseTest {
 
     @BeforeTest
