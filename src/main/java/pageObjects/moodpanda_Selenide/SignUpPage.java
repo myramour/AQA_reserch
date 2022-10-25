@@ -1,19 +1,13 @@
 package pageObjects.moodpanda_Selenide;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+
 import pageObjects.baseObjects.SelenideBasePage;
 import pageObjects.moodpanda_Selenide.lombok.SignUp;
 
-
-import java.util.Objects;
-
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.webdriver;
-import static com.codeborne.selenide.WebDriverConditions.urlContaining;
+
 
 public class SignUpPage extends SelenideBasePage {
     private final SelenideElement firstName = $("[placeholder='Your first name']");
@@ -24,7 +18,7 @@ public class SignUpPage extends SelenideBasePage {
     private final SelenideElement signUpBtn = $(By.xpath("//*[@class='box']//button"));
     private final SelenideElement signMeUpBtn = $(By.xpath("//*[@class='box']//span[contains(text(),'Sign me up')]"));
 
-    private final SelenideElement informText=$(By.xpath("//div/small"));
+    private final SelenideElement informText = $(By.xpath("//div/small"));
     private final SelenideElement alertOver16 = $("[class$='small']");
     private final SelenideElement alertValidation = $("[class$='notification is-danger']");
     private final SelenideElement alertFiledRequired = $("[class$='is-small']");
@@ -34,17 +28,17 @@ public class SignUpPage extends SelenideBasePage {
     }
 
     public SignUpPage verifyPageUri() {
-        webdriver().shouldHave(urlContaining("signup"));
+       verifyUri("signup");
         return this;
     }
 
     public SignUpPage enterFirstName(String firstname) {
-        enter(this.firstName,firstname);
+        enter(this.firstName, firstname);
         return this;
     }
 
     public SignUpPage enterLastNameInitial(String lastname) {
-        enter(this.lastNameInitial,lastname);
+        enter(this.lastNameInitial, lastname);
         return this;
     }
     public SignUpPage enterEmail(String email) {
@@ -56,7 +50,6 @@ public class SignUpPage extends SelenideBasePage {
       enter(this.password, password);
        return this;
     }
-
 
     public SignUpPage enterData(SignUp signUp) {
         enterFirstName(signUp.getFirstName());
@@ -78,24 +71,22 @@ public class SignUpPage extends SelenideBasePage {
     }
 
     public SignUpPage checkAlertIfCheckboxUncheck() {
-        this.alertOver16.shouldBe(matchText("You must be over 16 and agree to our terms to use MoodPanda."));
+        verifyAlert(this.alertOver16, "You must be over 16 and agree to our terms to use MoodPanda.");
         return this;
     }
 
     public SignUpPage checkAlertValidation(String alert) {
-        this.alertValidation.shouldBe(matchText(alert));
+        verifyAlert(this.alertValidation, alert);
         return this;
     }
 
     public SignUpPage checkAlertFiledRequired(String alert) {
-        if (alertFiledRequired.exists()) {
-            this.alertFiledRequired.shouldBe(matchText(alert));
-        }
+        verifyAlert(this.alertFiledRequired, alert);
         return this;
     }
 
     public SignUpPage checkInformingText() {
-            this.informText.shouldBe(matchText("We use essential cookies to allow users to login."));
+        verifyText(this.informText, "We use essential cookies to allow users to login.");
         return this;
     }
 }

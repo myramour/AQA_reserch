@@ -1,13 +1,10 @@
 package pageObjects.moodpanda_Selenide.navigation;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import pageObjects.baseObjects.SelenideBasePage;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.webdriver;
-import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
 public class NavigationPage extends SelenideBasePage {
     private final SelenideElement signUpBtn = $(By.partialLinkText("Sign up"));
@@ -25,17 +22,19 @@ public class NavigationPage extends SelenideBasePage {
     }
 
     public NavigationPage clickNavigationItem(LinksEnum links) {
-        links.getElement().click();
+        click(links.getElement());
         return this;
     }
 
     public NavigationPage verifyPageUri(String uri) {
-        webdriver().shouldHave(urlContaining(uri));
+        verifyUri(uri);
         return this;
     }
 
     public NavigationPage verifyTitle(String title) {
-        this.title.shouldBe(Condition.visible).shouldHave(Condition.matchText(title));
+        if(this.title.exists()==true) {
+            verifyText(this.title, title);
+        }
         return this;
     }
 

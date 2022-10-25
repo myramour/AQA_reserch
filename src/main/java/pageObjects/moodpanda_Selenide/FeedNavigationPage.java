@@ -1,17 +1,11 @@
 package pageObjects.moodpanda_Selenide;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import pageObjects.baseObjects.SelenideBasePage;
 
-import java.time.Duration;
-
-import static com.codeborne.selenide.Condition.disappear;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.webdriver;
-import static com.codeborne.selenide.WebDriverConditions.urlContaining;
+
 
 public class FeedNavigationPage extends SelenideBasePage {
     private final SelenideElement title = $(By.xpath("//div[contains(@class,'content-pane')]/child::div[contains(@class, 'is-hidden-touch')]//p[@class='subtitle']"));
@@ -26,12 +20,12 @@ public class FeedNavigationPage extends SelenideBasePage {
     }
 
     public FeedNavigationPage verifyPageUri() {
-        webdriver().shouldHave(urlContaining("/feed/global"));
+       verifyUri ("/feed/global");
         return this;
     }
 
     public FeedNavigationPage verifyPageTitle() {
-        this.title.shouldBe(Condition.visible, Duration.ofSeconds(10)).shouldHave(Condition.matchText("This is a community. Be kind."));
+        verifyText(this.title,"This is a community. Be kind." );
         return this;
     }
 

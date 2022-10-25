@@ -2,14 +2,10 @@ package pageObjects.moodpanda_Selenide;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import pageObjects.baseObjects.SelenideBasePage;
 
 
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.webdriver;
-import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
 public class LoginPage extends SelenideBasePage {
 
@@ -27,7 +23,7 @@ public class LoginPage extends SelenideBasePage {
         verifyPageUri();
     }
     public LoginPage verifyPageUri() {
-        webdriver().shouldHave(urlContaining("login"));
+        verifyUri("login");
         return this;
     }
 
@@ -67,23 +63,17 @@ public class LoginPage extends SelenideBasePage {
     }
 
     public LoginPage verifyEmailAlert(String errorMessage) {
-        if (emailAlert.exists()) {
-            this.emailAlert.shouldBe(matchText(errorMessage));
-        }
+        verifyAlert(this.emailAlert, errorMessage);
         return this;
     }
 
     public LoginPage verifyPasswordAlert(String errorMessage) {
-        if (passwordAlert.exists()) {
-            this.passwordAlert.shouldBe(matchText(errorMessage));
-        }
+        verifyAlert(this.passwordAlert, errorMessage);
         return this;
     }
 
     public LoginPage verifyValidationAlert(String errorMessage) {
-        if (validationAlert.exists()) {
-            this.validationAlert.shouldBe(matchText(errorMessage));
-        }
+        verifyAlert(this.validationAlert, errorMessage);
         return this;
     }
 }

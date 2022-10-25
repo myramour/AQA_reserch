@@ -30,19 +30,19 @@ public class Navigation_Test  extends SelenideBaseTest {
     }
 
     @Test(description = "Go to all navigation page and verify then all tab was opened with Data Provider", dataProvider = "navigation data")
-    public void navigationTestWithDataProvider(LinksEnum link, String uri) {
+    public void navigationTestWithDataProvider(LinksEnum link, String uri, String title) {
         get(NavigationPage.class)
-                .clickNavigationItem(link).verifyPageUri(uri);
+                .clickNavigationItem(link).verifyPageUri(uri).verifyTitle(title);
     }
 
     @DataProvider(name = "navigation data")
     public Object [][] data(){
         return new Object[][] {
-                {What, "monitor-your-mood"},
-                {How, "how-to-use-a-mood-diary"},
-                {About, "about"},
-                {Contact, "contact"},
-                {Home, "moodpanda.com"}
+                {What, "monitor-your-mood", "Monitor your mood"},
+                {How, "how-to-use-a-mood-diary", "How to use a mood diary"},
+                {About, "about", "About MoodPanda"},
+                {Contact, "contact", ""},
+                {Home, "moodpanda.com", "MoodPanda"}
         };
     }
 }

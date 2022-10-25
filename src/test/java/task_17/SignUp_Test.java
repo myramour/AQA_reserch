@@ -7,6 +7,7 @@ import pageObjects.baseObjects.SelenideBaseTest;
 import pageObjects.moodpanda_Selenide.navigation.NavigationPage;
 import pageObjects.moodpanda_Selenide.SignUpPage;
 import pageObjects.moodpanda_Selenide.lombok.SignUp;
+import testNgUtils.Retry;
 
 import java.lang.reflect.Method;
 /** Написать 3 теста регистрацию */
@@ -18,7 +19,7 @@ public class SignUp_Test extends SelenideBaseTest {
     }
 
     @Test(description = "Sign up tests with an empty one of the required fields ", dataProvider = "data")
-    public void negativeDataTest(String firstname, String lastname, String email, String password, Boolean check, String alert, String required) {
+    public void negativeSignUpTest(String firstname, String lastname, String email, String password, Boolean check, String alert, String required) {
 
         SignUp signUp = new SignUp.SignUpBuilder()
                 .withFirstName(firstname)
@@ -36,7 +37,7 @@ public class SignUp_Test extends SelenideBaseTest {
     }
 
     @Test(description = "Sign up tests with all required fields", dataProvider = "data")
-    public void positiveDataTest(String firstname, String lastname, String email, String password, Boolean check, String alert) {
+    public void positiveSignUpTest(String firstname, String lastname, String email, String password, Boolean check, String alert) {
 
         SignUp signUp = new SignUp.SignUpBuilder()
                 .withFirstName(firstname)
@@ -53,7 +54,7 @@ public class SignUp_Test extends SelenideBaseTest {
     @DataProvider(name = "data")
     public Object[][] data(Method method) {
         Object[][] result = null;
-        if (method.getName().equals("negativeDataTest")) {
+        if (method.getName().equals("negativeSignUpTest")) {
             result = new Object[][]{
                     {"FirstName", "L", "test@test.ru", "123456789987", false, "One or more validation errors occurred.", ""},
                     {"", "L", "test@test.ru", "123456789987", true, "One or more validation errors occurred.", "First name is required"},
@@ -61,7 +62,7 @@ public class SignUp_Test extends SelenideBaseTest {
                     {"FirstName", "L", "", "123456789987", true, "One or more validation errors occurred.", "Email address is required"},
                     {"FirstName", "L", "test@test.ru", "", true, "One or more validation errors occurred.", "Password is required"},
                     {"", "", "", "", false, "One or more validation errors occurred.", ""}};
-        } else if (method.getName().equals("positiveDataTest")) {
+        } else if (method.getName().equals("positiveSignUpTest")) {
             result =  new Object[][]{
                     {properties.getProperty("firstName"), properties.getProperty("lastNameInitial"), properties.getProperty("email"), properties.getProperty("password"), true, "You already have an account, or this account cannot be created"}
             };

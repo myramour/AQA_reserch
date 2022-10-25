@@ -7,6 +7,7 @@ import pageObjects.baseObjects.SelenideBaseTest;
 import pageObjects.moodpanda_Selenide.FeedNavigationPage;
 import pageObjects.moodpanda_Selenide.HomePage;
 import pageObjects.moodpanda_Selenide.LoginPage;
+import testNgUtils.Retry;
 
 /** Написать 3 теста авторизацию */
 public class Login_Test extends SelenideBaseTest {
@@ -26,7 +27,7 @@ public class Login_Test extends SelenideBaseTest {
                 .verifyValidationAlert(validationError);
     }
 
-    @Test(description = "Login and logout test with correct credentials :: {email}, {password}")
+    @Test(description = "Login and logout test with correct credentials :: {email}, {password}", retryAnalyzer = Retry.class)
     public void positiveDataTest(){
         get(LoginPage.class)
                 .enterEmail(properties.getProperty("validEmail"))

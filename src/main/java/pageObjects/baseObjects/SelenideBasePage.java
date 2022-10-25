@@ -1,23 +1,28 @@
 package pageObjects.baseObjects;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import driver.UIElement;
 import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.*;
 
+
 import java.util.Properties;
 
-import static com.codeborne.selenide.Condition.enabled;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.webdriver;
+import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 import static propertyHelper.PropertyReader.getProperties;
 
 @Log4j
 public abstract class SelenideBasePage {
-    protected WebDriver driver;
     protected Properties properties;
 
     protected SelenideBasePage() {
         properties = getProperties();
+    }
+
+    protected void verifyUri(String uri) {
+        webdriver().shouldHave(urlContaining(uri));
     }
 
     protected void enter(SelenideElement element, CharSequence... enterData) {
@@ -38,4 +43,13 @@ public abstract class SelenideBasePage {
         element.should(enabled).click();
     }
 
+    protected void verifyText(SelenideElement element, String title) {
+        element.shouldBe(Condition.visible).shouldHave(Condition.matchText(title));
+    }
+
+    protected void verifyAlert(SelenideElement element, String alert) {
+        if (element.exists()) {
+            element.shouldBe(matchText(alert));
+        }
+    }
 }
