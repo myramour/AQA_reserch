@@ -12,11 +12,17 @@ import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 public class SearchPage extends SelenideBasePage {
     private final SelenideElement headerNameOfSearch = $(By.tagName("h1"));
     private final SelenideElement headerCountOfSearch = $("[data-qa='vacancies-total-found']");
-
+    private final SelenideElement returnHomePagebtn = $("[class='supernova-logo-wrapper']");
 
     public SearchPage() {
         verifyPageUrl();
     }
+
+    public SearchPage returnHome() {
+        click(returnHomePagebtn);
+        return this;
+    }
+
 
     public SearchPage verifyPageUrl() {
         webdriver().shouldHave(urlContaining("vacancies"));
@@ -30,11 +36,13 @@ public class SearchPage extends SelenideBasePage {
     }
 
     public SearchPage verifySearchCount(int countForFeature) {
-       int count =Integer.parseInt(headerCountOfSearch.getText().substring(1,4).trim());
-
-        Assert.assertTrue(count>=countForFeature, "The number of vacancies is less than transferred from the feature file");
-        System.out.println("I'm count :: " + count);
+        if (headerCountOfSearch.getText().isEmpty()==false) {
+        int count = Integer.parseInt(headerCountOfSearch.getText().substring(1, 4).trim());
+            Assert.assertTrue(count >= countForFeature, "The number of vacancies is less than transferred from the feature file");
+            System.out.println("I'm count :: " + count);
+        } else {
+            System.out.println("Vacancies not found");
+        }
         return this;
     }
-
 }

@@ -6,7 +6,7 @@ import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
         features = {"src/test/resources/features/Rabotaby.feature"},
-        tags = "@regression",
+        //tags = "@regression" "@smoke",
         plugin = {
                 "json:target/cucumber.json",
                 "html:target/site/cucumber-pretty"
