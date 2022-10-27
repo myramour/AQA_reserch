@@ -1,5 +1,6 @@
 package testNgUtils;
 
+import lombok.SneakyThrows;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -8,6 +9,7 @@ import propertyHelper.PropertyReader;
 
 /**Listener для TestNG Report и для получения параметра для работы с property*/
 public class Listener implements ITestListener {
+    @SneakyThrows //для бросания проверяемых исключений без их объявления в throws метода.
     @Override
     public void onStart(ITestContext context) { //ITestContext - интерфейс, котопый содержит всю информацию о тесте и о параметризации внутри xml
         Reporter.log(context.getSuite().getXmlSuite().getTest()); // получаем текст свита и записываем в лог
